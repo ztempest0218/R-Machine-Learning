@@ -1,0 +1,23 @@
+<div class="validation-guide">
+<svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="hg-title hg-desc" style="display:block;width:100%;height:auto;margin:24px 0;font-family: sans-serif;">
+<title id="hg-title">train.csvを学習用80%と検証用20%に分割</title>
+<desc id="hg-desc">test.csvは正解価格が非公開で、手元では検証できない。そのため正解付きのtrain.csv 1460件を、学習用1168件と検証用292件に分ける。</desc>
+<defs><marker id="hg-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#687b8e"/></marker></defs>
+<rect x="40" y="5" width="720" height="48" rx="5" fill="#f1f6f3" stroke="#79a98a"/>
+<text x="400" y="35" text-anchor="middle" font-size="17" fill="#256b48">test.csv：正解価格は非公開 → 手元では検証できない</text>
+<text x="400" y="86" text-anchor="middle" font-size="16" fill="#445566">正解のある train.csv を分割する</text>
+<rect x="220" y="104" width="360" height="60" rx="4" fill="#fff" stroke="#93a8be"/>
+<text x="400" y="130" text-anchor="middle" font-size="19" font-weight="700" fill="#293847">train.csv：1,460件</text>
+<text x="400" y="152" text-anchor="middle" font-size="15" fill="#445566">住宅情報 ＋ 正解価格</text>
+<path d="M400 164 V192 H210 V219 M400 192 H590 V219" fill="none" stroke="#687b8e" stroke-width="2" marker-end="url(#hg-arrow)"/>
+<path d="M210 192 V219" fill="none" stroke="#687b8e" stroke-width="2" marker-end="url(#hg-arrow)"/>
+<rect x="50" y="228" width="320" height="105" rx="4" fill="#edf4fc" stroke="#578dc8"/>
+<text x="210" y="259" text-anchor="middle" font-size="20" font-weight="700" fill="#245e98">80%：学習用（1,168件）</text>
+<text x="210" y="286" text-anchor="middle" font-size="16" fill="#245e98">train</text>
+<text x="210" y="315" text-anchor="middle" font-size="17" fill="#293847">モデルを学習する</text>
+<rect x="430" y="228" width="320" height="105" rx="4" fill="#fff4e8" stroke="#d89448"/>
+<text x="590" y="259" text-anchor="middle" font-size="20" font-weight="700" fill="#a65309">20%：検証用（292件）</text>
+<text x="590" y="286" text-anchor="middle" font-size="16" fill="#a65309">validation</text>
+<text x="590" y="315" text-anchor="middle" font-size="17" fill="#293847">予測と正解価格を比較する</text>
+</svg>
+</div>

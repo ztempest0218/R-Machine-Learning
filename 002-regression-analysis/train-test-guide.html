@@ -1,0 +1,57 @@
+<figure class="kaggle-flow" aria-label="Kaggleの学習から採点までの流れ">
+<style>
+.kaggle-flow { margin:24px 0; }
+.kaggle-flow .kf-diagram > svg { display:block; width:100%; height:auto; }
+.kaggle-flow text { font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; fill:#263443; }
+.kaggle-flow .kf-title { font-size:19px; font-weight:600; }
+.kaggle-flow .kf-text { font-size:16px; }
+.kaggle-flow .kf-small { font-size:14px; fill:#536171; }
+.kaggle-flow figcaption { margin-top:8px; color:#666; font-size:14px; }
+.kf-diagram { position:relative; container-type:inline-size; }
+.kaggle-flow .kf-label { position:absolute; transform:translateY(-50%); white-space:nowrap; font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; color:#263443; font-size:2cqw; line-height:1.4; }
+.kaggle-flow .kf-label.kf-title { font-size:2.375cqw; }
+.kaggle-flow .kf-label.kf-small { font-size:1.75cqw; color:#536171; }
+</style>
+<div class="kf-diagram">
+
+<svg viewBox="0 0 800 505" role="img" aria-labelledby="kf-title kf-desc">
+<title id="kf-title">train.csvで学習したモデルにtest.csvを入力し、予測をKaggleに提出する</title>
+<desc id="kf-desc">正解価格付きの1460件からモデルを学習する。学習済みモデルと、正解価格が非公開のtest.csvの1459件を予測処理へつなぐ。予測価格を提出するとKaggleが正解と比較して採点する。</desc>
+<defs><marker id="kf-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#647789"/></marker></defs>
+<!-- 学習データと学習済みモデル -->
+<rect x="25" y="25" width="285" height="116" rx="3" fill="#fff" stroke="#91a3b4"/>
+<path d="M25 61H310" stroke="#d6dee5"/>
+<text x="45" y="50" class="kf-title">train.csv</text>
+<text x="290" y="50" text-anchor="end" class="kf-small">1,460件</text>
+<text x="45" y="116" class="kf-small">例：1,710平方ft → 208,500ドル</text>
+<path d="M310 83H451" fill="none" stroke="#647789" stroke-width="2" marker-end="url(#kf-arrow)"/>
+<text x="382" y="67" text-anchor="middle" class="kf-text">学習</text>
+<rect x="460" y="40" width="295" height="86" rx="3" fill="#edf3f8" stroke="#68849d"/>
+<text x="608" y="76" text-anchor="middle" class="kf-title">学習済みモデル</text>
+<text x="608" y="104" text-anchor="middle" class="kf-small">住宅情報から価格を求める式</text>
+<!-- 予測にはモデルとtest.csvの両方を入力 -->
+<path d="M608 126V223" fill="none" stroke="#647789" stroke-width="2" marker-end="url(#kf-arrow)"/>
+<text x="625" y="182" class="kf-small">この式を使う</text>
+<rect x="25" y="215" width="285" height="116" rx="3" fill="#fff" stroke="#91a3b4"/>
+<path d="M25 251H310" stroke="#d6dee5"/>
+<text x="45" y="240" class="kf-title">test.csv</text>
+<text x="290" y="240" text-anchor="end" class="kf-small">1,459件</text>
+<text x="45" y="306" class="kf-small">896平方ft・品質5・1961年築</text>
+<path d="M310 273H451" fill="none" stroke="#647789" stroke-width="2" marker-end="url(#kf-arrow)"/>
+<text x="382" y="257" text-anchor="middle" class="kf-text">入力</text>
+<rect x="460" y="232" width="295" height="90" rx="3" fill="#fff" stroke="#68849d"/>
+<text x="608" y="297" text-anchor="middle" class="kf-small">この住宅の予測：約 __PREDICTION__ ドル</text>
+<!-- 提出から採点 -->
+<path d="M608 322V416" fill="none" stroke="#647789" stroke-width="2" marker-end="url(#kf-arrow)"/>
+<rect x="460" y="425" width="295" height="65" rx="3" fill="#edf3f8" stroke="#68849d"/>
+<text x="608" y="453" text-anchor="middle" class="kf-title">Kaggleで採点</text>
+</svg>
+<div class="kf-label" style="left:5.625%;top:16.04%;">住宅情報 \(X\) ＋ 正解価格 \(y\)</div>
+<div class="kf-label" style="left:5.625%;top:53.66%;">住宅情報 \(X\)（正解 \(y\) は非公開）</div>
+<div class="kf-label kf-title" style="left:57.5%;width:36.875%;top:51.49%;text-align:center;">予測価格 \(\hat{y}\) を求める</div>
+<div class="kf-label" style="left:78.125%;top:72.67%;">予測 \(\hat{y}\) を提出</div>
+<div class="kf-label kf-small" style="left:57.5%;width:36.875%;top:92.87%;text-align:center;">予測 \(\hat{y}\) と非公開の正解 \(y\) を比較</div>
+</div>
+
+<figcaption>例の予測額は、面積・品質・建築年を使った重回帰で計算。</figcaption>
+</figure>

@@ -1,0 +1,54 @@
+<figure class="three-split">
+<style>
+.three-split { margin:26px 0; }
+.three-split .ts-diagram { position:relative; container-type:inline-size; }
+.three-split .ts-diagram > svg { display:block; width:100%; height:auto; }
+.three-split .ts-label { position:absolute; transform:translateY(-50%); text-align:center; color:#263443; font-size:2cqw; line-height:1.65; white-space:nowrap; }
+.three-split .ts-heading { font-weight:600; font-size:2.25cqw; }
+.three-split .ts-small { font-size:1.75cqw; color:#536171; }
+.split-train, .split-validation, .split-test { font-weight:700; }
+.split-train, .three-split .ts-train { color:#235b8e; }
+.split-validation, .three-split .ts-validation { color:#94500e; }
+.split-test, .three-split .ts-test { color:#276747; }
+</style>
+<div class="ts-diagram">
+<svg viewBox="0 0 800 400" role="img" aria-labelledby="ts-title ts-desc">
+<title id="ts-title">train・validation・testの役割</title>
+<desc id="ts-desc">Kaggleのtrain.csvを学習用trainと検証用validationに分割する。trainでモデルを学習し、validationで比較・調整する。モデル確定後、test.csvへの予測を提出し、Kaggleが非公開の正解と比較して最終評価する。</desc>
+<defs><marker id="ts-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#647789"/></marker></defs>
+<rect x="530" y="1" width="260" height="393" rx="8" fill="#f1f7f3" stroke="#7aa98b" stroke-width="1.5"/>
+<g stroke="#91a3b4" fill="#fff">
+<rect x="30" y="10" width="480" height="55" rx="3"/>
+<rect x="550" y="10" width="220" height="55" rx="3"/>
+<rect x="30" y="120" width="220" height="80" rx="3" fill="#edf4fb" stroke="#6693b9"/>
+<rect x="290" y="120" width="220" height="80" rx="3" fill="#fff4e7" stroke="#c89759"/>
+<rect x="550" y="120" width="220" height="80" rx="3" fill="#eaf5ee" stroke="#7aa98b"/>
+<rect x="30" y="255" width="220" height="65" rx="3" fill="#edf4fb" stroke="#6693b9"/>
+<rect x="290" y="255" width="220" height="65" rx="3" fill="#fff4e7" stroke="#c89759"/>
+<rect x="550" y="255" width="220" height="65" rx="3" fill="#eaf5ee" stroke="#7aa98b"/>
+</g>
+<g fill="none" stroke="#647789" stroke-width="2" marker-end="url(#ts-arrow)">
+<path d="M270 65V88H140V112"/>
+<path d="M270 88H400V112"/>
+<path d="M660 65V112"/>
+<path d="M140 200V247"/>
+<path d="M400 200V247"/>
+<path d="M660 200V247"/>
+<path d="M250 287H282"/>
+<path d="M510 287H542"/>
+<path d="M400 320V355H140V328" stroke-dasharray="5 4"/>
+</g>
+</svg>
+<div class="ts-label" style="left:3.75%;width:60%;top:9.375%;">Kaggle の train.csv：正解あり</div>
+<div class="ts-label ts-test" style="left:68.75%;width:27.5%;top:9.375%;">Kaggle の test.csv</div>
+<div class="ts-label ts-small" style="left:28%;width:12%;top:26%;">分割</div>
+<div class="ts-label ts-train" style="left:3.75%;width:27.5%;top:40%;"><span class="ts-heading">train：学習用</span><br>\(X\) と \(y\)</div>
+<div class="ts-label ts-validation" style="left:36.25%;width:27.5%;top:40%;"><span class="ts-heading">validation：検証用</span><br>\(X\) と \(y\)</div>
+<div class="ts-label ts-test" style="left:68.75%;width:27.5%;top:40%;"><span class="ts-heading">test：最終評価用</span><br>\(X\) のみ（\(y\) は非公開）</div>
+<div class="ts-label ts-train" style="left:3.75%;width:27.5%;top:71.875%;">モデルを学習</div>
+<div class="ts-label ts-validation" style="left:36.25%;width:27.5%;top:71.875%;">モデルを比較・調整</div>
+<div class="ts-label ts-test" style="left:68.75%;width:27.5%;top:71.875%;">予測を提出・採点</div>
+<div class="ts-label ts-small" style="left:66.25%;width:32.5%;top:90%;">モデル確定後に独立評価</div>
+<div class="ts-label ts-small" style="left:8%;width:51%;top:95%;">調整して再学習</div>
+</div>
+</figure>

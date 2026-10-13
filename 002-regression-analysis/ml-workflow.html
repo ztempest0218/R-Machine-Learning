@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 340" role="img" aria-labelledby="mw-title mw-desc" style="display:block;width:100%;height:auto;margin:24px 0;font-family:sans-serif">
+<title id="mw-title">機械学習の手順</title>
+<desc id="mw-desc">データ分割、trainで学習、validationで予測、評価、チューニングの順に進む。調整したら学習に戻る。モデル確定後に、残しておいたtestで最終評価する。</desc>
+<defs><marker id="mw-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#687b8e"/></marker></defs>
+<g fill="none" stroke="#687b8e" stroke-width="2" marker-end="url(#mw-arrow)">
+<path d="M170 95H193"/><path d="M350 95H373"/><path d="M530 95H553"/><path d="M710 95H733"/>
+<path d="M820 150V207H280V159"/>
+<path d="M100 150V295H348"/>
+</g>
+<rect x="20" y="40" width="150" height="110" rx="5" fill="#f6f7f9" stroke="#99a9b8"/>
+<rect x="200" y="40" width="150" height="110" rx="5" fill="#edf4fc" stroke="#578dc8"/>
+<rect x="380" y="40" width="150" height="110" rx="5" fill="#fff4e8" stroke="#d89448"/>
+<rect x="560" y="40" width="150" height="110" rx="5" fill="#fff4e8" stroke="#d89448"/>
+<rect x="740" y="40" width="160" height="110" rx="5" fill="#f6f7f9" stroke="#99a9b8"/>
+<g text-anchor="middle" font-size="19" font-weight="700" fill="#293847">
+<text x="95" y="72">データ分割</text><text x="275" y="72" fill="#245e98">学習</text><text x="455" y="72" fill="#a65309">予測</text><text x="635" y="72" fill="#a65309">評価</text><text x="820" y="72">チューニング</text>
+</g>
+<g text-anchor="middle" font-size="15" fill="#445566">
+<text x="95" y="103">train・validation</text><text x="95" y="127">testに分ける</text>
+<text x="275" y="103">学習用データで</text><text x="275" y="127">係数を推定</text>
+<text x="455" y="103">検証用データの</text><text x="455" y="127">予測値を求める</text>
+<text x="635" y="103">正解と比較し</text><text x="635" y="127">RMSEなどを計算</text>
+<text x="820" y="103">特徴量やモデルの</text><text x="820" y="127">設定を調整</text>
+<text x="550" y="232">調整したら、再び学習・予測・評価</text>
+</g>
+<rect x="120" y="276" width="211" height="33" fill="white"/>
+<text x="224" y="298" text-anchor="middle" font-size="15" fill="#276747">テストデータは残しておく</text>
+<rect x="355" y="267" width="400" height="59" rx="5" fill="#edf6f0" stroke="#79a98a"/>
+<text x="555" y="303" text-anchor="middle" font-size="18" font-weight="700" fill="#276747">モデル確定後：テストデータで最終評価</text>
+</svg>

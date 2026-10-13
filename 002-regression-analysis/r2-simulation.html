@@ -1,0 +1,74 @@
+<div id="r2-simulation">
+<style>
+#r2-simulation { margin:24px 0; color:#263443; }
+#r2-simulation .rs-controls { margin:12px 0 16px; max-width:760px; }
+#r2-simulation input[type="range"] { width:100%; accent-color:#235b8e; cursor:pointer; margin:12px 0 4px; }
+#r2-simulation input:focus-visible { outline:2px solid #b66b26; outline-offset:4px; }
+#r2-simulation .rs-ticks { display:flex; justify-content:space-between; font-size:13px; color:#536171; }
+#r2-simulation svg { display:block; width:100%; max-width:760px; margin:auto; height:auto; }
+#r2-simulation .rs-result { text-align:center; font-variant-numeric:tabular-nums; margin-top:12px; }
+#r2-simulation .rs-key { display:flex; gap:22px; justify-content:center; font-size:14px; }
+#r2-simulation .rs-line { display:inline-block; width:24px; border-top:3px solid #235b8e; vertical-align:middle; margin-right:6px; }
+#r2-simulation .rs-mean { border-top:2px dashed #b66b26; }
+</style>
+<div class="rs-controls">
+<label for="rs-slider">\(R^2\)：<output id="rs-selected" for="rs-slider">0.5</output></label>
+<input id="rs-slider" type="range" min="0" max="1" step="0.1" value="0.5" aria-label="決定係数" aria-valuetext="0.5">
+<div class="rs-ticks" aria-hidden="true"><span>0.0</span><span>0.1</span><span>0.2</span><span>0.3</span><span>0.4</span><span>0.5</span><span>0.6</span><span>0.7</span><span>0.8</span><span>0.9</span><span>1.0</span></div>
+</div>
+<svg viewBox="0 0 760 410" role="img" aria-labelledby="rs-title rs-description">
+<title id="rs-title">決定係数と散布図</title>
+<desc id="rs-description">選んだ決定係数に合わせて40個の説明用データとOLS直線が変化する。</desc>
+<g id="rs-plot"></g>
+</svg>
+<div class="rs-key"><span><i class="rs-line"></i>OLS：\(\hat{y}\)</span><span><i class="rs-line rs-mean"></i>平均：\(\bar{y}\)</span></div>
+<div class="rs-result" aria-live="polite">\(R^2\) = <span id="rs-r2"></span>　SSE = <span id="rs-sse"></span>　TSS = <span id="rs-tss"></span></div>
+<noscript>この図を操作するにはJavaScriptを有効にしてください。</noscript>
+<script>
+(function () {
+  const root = document.getElementById('r2-simulation');
+  const n = 40;
+  const sum = a => a.reduce((s,v) => s+v,0);
+  const dot = (a,b) => sum(a.map((v,i) => v*b[i]));
+  const center = a => { const mean = sum(a)/a.length; return a.map(v => v-mean); };
+  const normalize = a => { const scale = Math.sqrt(n/dot(a,a)); return a.map(v => v*scale); };
+  const x = normalize(center(Array.from({length:n},(_,i) => i)));
+  let z = center(Array.from({length:n},(_,i) => Math.sin((i+1)*12.9898)*Math.cos((i+1)*4.1414)));
+  const projection = dot(x,z)/dot(x,x);
+  z = normalize(z.map((v,i) => v-projection*x[i]));
+  const px = v => 65+(v+2)/4*665;
+  const py = v => 355-(v+3.5)/7*325;
+  const line = (x1,y1,x2,y2,color,width,dash='') => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color}" stroke-width="${width}" ${dash ? 'stroke-dasharray="'+dash+'"' : ''}/>`;
+  const label = (x,y,t) => `<text x="${x}" y="${y}" text-anchor="middle" fill="#536171" font-size="16">${t}</text>`;
+  function render(r) {
+    const y = x.map((v,i) => Math.sqrt(r)*v+Math.sqrt(1-r)*z[i]);
+    const mean = sum(y)/n;
+    const slope = dot(x,y)/dot(x,x);
+    const fitted = x.map(v => mean+slope*v);
+    const sse = sum(y.map((v,i) => (v-fitted[i])**2));
+    const tss = sum(y.map(v => (v-mean)**2));
+    let svg = '';
+    [-3,-2,-1,0,1,2,3].forEach(t => {
+      svg += line(65,py(t),730,py(t),'#edf0f2',1);
+      svg += `<text x="50" y="${py(t)+5}" text-anchor="end" fill="#536171" font-size="16">${t}</text>`;
+    });
+    [-2,-1,0,1,2].forEach(t => { svg += label(px(t),380,t); });
+    svg += line(65,30,65,355,'#536171',1)+line(65,355,730,355,'#536171',1);
+    svg += label(400,405,'x')+label(22,195,'y');
+    svg += line(px(-2),py(mean),px(2),py(mean),'#b66b26',2,'6 5');
+    svg += line(px(-2),py(mean-2*slope),px(2),py(mean+2*slope),'#235b8e',3);
+    y.forEach((v,i) => { svg += `<circle cx="${px(x[i])}" cy="${py(v)}" r="4.5" fill="#263443" fill-opacity="0.78"/>`; });
+    root.querySelector('#rs-plot').innerHTML = svg;
+    root.querySelector('#rs-r2').textContent = (1-sse/tss).toFixed(3);
+    root.querySelector('#rs-sse').textContent = sse.toFixed(1);
+    root.querySelector('#rs-tss').textContent = tss.toFixed(1);
+    root.querySelector('#rs-selected').textContent = r.toFixed(1);
+    root.querySelector('#rs-slider').setAttribute('aria-valuetext', r.toFixed(1));
+    root.querySelector('#rs-description').textContent = `説明用データ40点。R²=${r.toFixed(1)}。SSE=${sse.toFixed(1)}、TSS=${tss.toFixed(1)}。`;
+  }
+  const slider = root.querySelector('#rs-slider');
+  slider.addEventListener('input', () => render(Number(slider.value)));
+  render(0.5);
+})();
+</script>
+</div>

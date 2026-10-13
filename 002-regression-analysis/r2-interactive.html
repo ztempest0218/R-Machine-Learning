@@ -1,0 +1,103 @@
+<div id="r2-explorer">
+<style>
+#r2-explorer { margin:1.5em 0; color:#263443; }
+#r2-explorer .controls,#r2-explorer .plots { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px; }
+#r2-explorer .buttons { display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px; }
+#r2-explorer button { padding:8px 12px;border:1px solid #abb9c7;background:#f2f5f8;border-radius:4px;color:#263443; }
+#r2-explorer button[aria-pressed="true"] { background:#21548a;color:white; }
+#r2-explorer label { display:block;font-weight:normal; }
+#r2-explorer input { width:100%;margin:12px 0; }
+#r2-explorer svg { width:100%;display:block; }
+#r2-explorer .track { height:18px;background:#edf1f5;margin:6px 0 12px; }
+#r2-explorer .fill { height:100%;background:#c06424; }
+#r2-explorer .result { font-size:20px;margin:14px 0;font-variant-numeric:tabular-nums; }
+#r2-explorer .hint { font-size:14px; }
+@media(max-width:650px) { #r2-explorer .controls,#r2-explorer .plots { grid-template-columns:1fr; } }
+</style>
+<div class="buttons">
+<button type="button" data-mode="mean">平均値を予測</button>
+<button type="button" data-mode="model">重回帰の予測</button>
+<button type="button" data-mode="perfect">完全に一致</button>
+<button type="button" data-mode="bad">大きく上方へずらす</button>
+</div>
+<div class="controls">
+<label for="r2-spread">予測の広がり：<span id="r2-spread-value"></span> 倍
+<input id="r2-spread" type="range" min="0" max="2" step="0.05" value="1"></label>
+<label for="r2-offset">上下移動：<span id="r2-offset-value"></span> ドル
+<input id="r2-offset" type="range" min="-3" max="3" step="0.1" value="0"></label>
+</div>
+<div class="hint" id="r2-formula"></div>
+<div class="plots">
+<div><strong>基準：評価データの平均予測</strong><svg id="r2-baseline" role="img" aria-label="平均予測と実際の価格"></svg></div>
+<div><strong>比較：モデルの予測</strong><svg id="r2-model" role="img" aria-label="モデル予測と実際の価格"></svg></div>
+</div>
+<div class="hint">点は評価用の全住宅。対角線は予測と実際の価格が一致する位置。両図の軸は同じ尺度。</div>
+<div id="r2-base-label"></div><div class="track"><div id="r2-base-bar" class="fill" style="background:#738398"></div></div>
+<div id="r2-model-label"></div><div class="track"><div id="r2-model-bar" class="fill"></div></div>
+<div class="hint">二つの棒は同じ尺度。表示範囲は誤差平方和に合わせて更新。</div>
+<div class="result" id="r2-result" aria-live="polite" aria-atomic="true"></div>
+<noscript>JavaScriptを有効にすると、実データの予測とR²を操作できます。計算結果は本文のRコードでも確認できます。</noscript>
+<script>
+(function(){
+const root=document.getElementById('r2-explorer');
+const data=JSON.parse(document.getElementById('r2-data').textContent);
+const get=id=>root.querySelector('#'+id);
+const actual=data.actual, model=data.predicted, n=actual.length;
+const mean=actual.reduce((a,b)=>a+b,0)/n;
+const tss=actual.reduce((s,y)=>s+(y-mean)**2,0), scale=Math.sqrt(tss/n);
+const spread=get('r2-spread'), offset=get('r2-offset');
+let mode='model';
+const fmt=n=>n.toLocaleString('ja-JP',{maximumFractionDigits:0});
+function el(svg,type,attrs,text){
+ const e=document.createElementNS('http://www.w3.org/2000/svg',type);
+ Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));
+ if(text!==undefined)e.textContent=text;
+ svg.appendChild(e);return e;
+}
+function chart(svg,ys,low,high){
+ const w=Math.max(260,svg.parentElement.clientWidth),h=310,l=62,r=w-18,t=30,b=h-52;
+ svg.setAttribute('viewBox','0 0 '+w+' '+h);svg.setAttribute('height',h);svg.replaceChildren();
+ el(svg,'title',{},'実際の価格と予測価格：評価用 '+n+' 件');
+ const px=v=>l+(v-low)/(high-low)*(r-l),py=v=>b-(v-low)/(high-low)*(b-t);
+ el(svg,'text',{x:l,y:16,'font-size':12,fill:'#263443'},'予測価格（千ドル）');
+ for(let i=0;i<=4;i++){
+  const v=low+(high-low)*i/4;
+  el(svg,'line',{x1:l,x2:r,y1:py(v),y2:py(v),stroke:'#e1e6ed'});
+  el(svg,'text',{x:l-7,y:py(v)+4,'text-anchor':'end','font-size':11,fill:'#536171'},fmt(v/1000));
+  el(svg,'text',{x:px(v),y:b+20,'text-anchor':'middle','font-size':11,fill:'#536171'},fmt(v/1000));
+ }
+ el(svg,'line',{x1:l,x2:r,y1:b,y2:t,stroke:'#c06424','stroke-width':2});
+ actual.forEach((a,i)=>{
+  const point=el(svg,'circle',{cx:px(a),cy:py(ys[i]),r:3,fill:'#21548a',opacity:.55});
+  el(point,'title',{},'Id '+data.id[i]+'：実際 '+fmt(a)+' USD / 予測 '+fmt(ys[i])+' USD');
+ });
+ el(svg,'text',{x:(l+r)/2,y:h-7,'text-anchor':'middle','font-size':12,fill:'#263443'},'実際の価格（千ドル）');
+}
+function update(){
+ const a=Number(spread.value), shift=Number(offset.value)*scale;
+ const ys=mode==='perfect'?actual.slice():model.map(p=>mean+a*(p-mean)+shift);
+ const sse=actual.reduce((s,y,i)=>s+(y-ys[i])**2,0), ratio=sse/tss;
+ get('r2-spread-value').textContent=a.toFixed(2);
+ get('r2-offset-value').textContent=fmt(shift);
+ spread.disabled=offset.disabled=mode==='perfect';
+ get('r2-formula').textContent=mode==='perfect'?'説明用：実際の価格を表示（未知データへの予測ではない）':'調整後の予測 = 評価平均 + 広がり ×（元の予測 − 評価平均）+ 上下移動';
+ const low=Math.min(0,...actual,...ys),high=Math.max(...actual,...ys)*1.08;
+ chart(get('r2-baseline'),actual.map(()=>mean),low,high);
+ chart(get('r2-model'),ys,low,high);
+ const maximum=Math.max(tss,sse)*1.05;
+ get('r2-base-bar').style.width=(100*tss/maximum)+'%';
+ get('r2-model-bar').style.width=(100*sse/maximum)+'%';
+ get('r2-base-label').textContent='TSS（評価平均）：'+fmt(tss)+' ドル²';
+ get('r2-model-label').textContent='SSE（予測）：'+fmt(sse)+' ドル²';
+ get('r2-result').textContent='R² = 1 − SSE / TSS = '+(1-ratio).toFixed(3);
+ root.querySelectorAll('button[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));
+}
+root.querySelectorAll('button[data-mode]').forEach(b=>b.addEventListener('click',()=>{
+ mode=b.dataset.mode;spread.value=mode==='mean'?0:1;offset.value=mode==='bad'?2:0;update();
+}));
+[spread,offset].forEach(input=>input.addEventListener('input',()=>{mode='custom';update();}));
+update();
+if(typeof ResizeObserver!=='undefined')new ResizeObserver(update).observe(root.querySelector('.plots'));
+})();
+</script>
+</div>

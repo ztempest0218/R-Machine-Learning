@@ -1,0 +1,38 @@
+House Prices: Advanced Regression Techniques — data provenance
+Downloaded: 2026-10-12 (Asia/Tokyo)
+
+Competition:
+https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques
+
+The unauthenticated Kaggle download endpoint returned HTTP 401.
+The two unchanged CSV files were obtained from the public textbook mirror
+documented in Dive into Deep Learning:
+https://d2l.ai/chapter_multilayer-perceptrons/kaggle-house-price.html
+
+Local file: train.csv
+Download: https://d2l-data.s3-accelerate.amazonaws.com/kaggle_house_pred_train.csv
+SHA-1: 585e9cc93e70b39160e7921475f9bcd7d31219ce
+Shape: 1460 rows, 81 columns (Id, 79 predictors, SalePrice).
+
+Local file: test.csv
+Download: https://d2l-data.s3-accelerate.amazonaws.com/kaggle_house_pred_test.csv
+SHA-1: fa19780a7b011d9b009e8bff8e99922a8ee2eb90
+Shape: 1459 rows, 80 columns (Id, 79 predictors; no SalePrice).
+
+Both SHA-1 hashes match the values published in the textbook.
+CSV bytes have not been modified. This folder contains the two data tables,
+not the full Kaggle download bundle (submission template/data dictionary).
+The competition test labels are not public. Split train.csv for local evaluation.
+
+Original Ames Housing reference:
+De Cock, D. (2011). Ames, Iowa: Alternative to the Boston Housing Data as an
+End of Semester Regression Project. Journal of Statistics Education, 19(3).
+https://jse.amstat.org/v19n3/decock.pdf
+
+This is not Wooldridge's hprice1 (88 Boston-area homes, 1990).
+https://vincentarelbundock.github.io/Rdatasets/doc/wooldridge/hprice1.html
+
+Codebook: data_description.txt
+Competition: https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/data
+Mirror: https://raw.githubusercontent.com/emanrao/AmesHousing/master/data_description.txt
+Downloaded: 2026-10-12

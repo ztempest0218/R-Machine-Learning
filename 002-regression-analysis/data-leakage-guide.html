@@ -1,0 +1,48 @@
+<figure class="split-flow">
+<style>
+.split-flow { margin:24px 0; }
+.split-flow .sf-diagram { position:relative; container-type:inline-size; }
+.split-flow .sf-diagram > svg { display:block; width:100%; height:auto; }
+.split-flow .sf-label { position:absolute; transform:translateY(-50%); text-align:center; color:#263443; font-size:2cqw; line-height:1.6; white-space:nowrap; }
+.split-flow .sf-heading { font-weight:600; font-size:2.25cqw; }
+.split-flow .sf-small { font-size:1.75cqw; }
+.split-flow .sf-warning { color:#a34836; }
+.split-flow .sf-train { color:#235b8e; }
+.split-flow .sf-test { color:#276747; }
+</style>
+<div class="sf-diagram">
+<svg viewBox="0 0 800 455" role="img" aria-labelledby="sf-title sf-desc">
+<title id="sf-title">正解付きデータの二分と、テスト結果を使ったモデル調整によるデータ漏洩</title>
+<desc id="sf-desc">正解付きデータをtrainとtestに分ける。trainでモデルを学習し、testの予測と正解を比較する。評価結果からモデル調整へ戻る破線は、テストデータの情報がモデル開発に入り込むことを示す。</desc>
+<defs>
+<marker id="sf-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#647789"/></marker>
+<marker id="sf-leak-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#a34836"/></marker>
+</defs>
+<g fill="#fff" stroke="#91a3b4">
+<rect x="250" y="10" width="300" height="65" rx="3"/>
+<rect x="50" y="135" width="290" height="85" rx="3" fill="#edf4fb" stroke="#6693b9"/>
+<rect x="460" y="135" width="290" height="85" rx="3" fill="#eaf5ee" stroke="#7aa98b"/>
+<rect x="50" y="285" width="290" height="75" rx="3" fill="#edf4fb" stroke="#6693b9"/>
+<rect x="460" y="285" width="290" height="75" rx="3" fill="#eaf5ee" stroke="#7aa98b"/>
+</g>
+<g fill="none" stroke="#647789" stroke-width="2" marker-end="url(#sf-arrow)">
+<path d="M400 75V102H195V126"/>
+<path d="M400 102H605V126"/>
+<path d="M195 220V276"/>
+<path d="M605 220V276"/>
+<path d="M340 322H451"/>
+</g>
+<path d="M605 360V410H195V369" fill="none" stroke="#a34836" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#sf-leak-arrow)"/>
+</svg>
+<div class="sf-label" style="left:31.25%;width:37.5%;top:9.34%;">正解付きデータ \((X,y)\)</div>
+<div class="sf-label sf-small" style="left:43%;width:14%;top:26%;">二つに分割</div>
+<div class="sf-label sf-train" style="left:6.25%;width:36.25%;top:39%;"><span class="sf-heading">train：学習用</span><br>説明変数 \(X\) と正解 \(y\)</div>
+<div class="sf-label sf-test" style="left:57.5%;width:36.25%;top:39%;"><span class="sf-heading">test：評価用</span><br>説明変数 \(X\) と正解 \(y\)</div>
+<div class="sf-label sf-small sf-train" style="left:27.5%;top:55%;text-align:left;">学習</div>
+<div class="sf-label sf-small sf-test" style="left:78.125%;top:55%;text-align:left;">評価</div>
+<div class="sf-label sf-heading sf-train" style="left:6.25%;width:36.25%;top:71%;">モデル</div>
+<div class="sf-label sf-test" style="left:57.5%;width:36.25%;top:71%;"><span class="sf-heading">予測精度を評価</span><br>予測 \(\hat{y}\) と正解 \(y\)</div>
+<div class="sf-label sf-small" style="left:43%;width:13%;top:67%;">予測 \(\hat{y}\)</div>
+<div class="sf-label sf-warning" style="left:20%;width:60%;top:96%;">正解・評価結果を見てモデルを調整するおそれ</div>
+</div>
+</figure>
