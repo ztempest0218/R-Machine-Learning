@@ -9,6 +9,9 @@ Machine Learning with R course at Niigata University
 ### 001 Guidance
 - [HTML](./001-guidance.html)
 
+### 002 Regression Analysis
+- [HTML](./002-regression-analysis.html)
+
 ## 📄 その他
 - [シラバス](./R-syllabus.pdf)
 
