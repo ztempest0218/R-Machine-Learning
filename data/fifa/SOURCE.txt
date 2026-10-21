@@ -1,0 +1,12 @@
+FIFA 20 ability ratings for the existing R course
+
+Derived from the existing course file:
+/Users/ztempest0218/Documents/GitHub/R-Programming/data/players_20.csv
+Course distribution link: https://ztempest0218.github.io/R-Programming/data/players_20.csv
+Original file SHA-256: 3eaecbe17d7e651e42eea11c6883b2e5528e7b6be02b68232b9151e95344e911
+
+Retained columns: sofifa_id, short_name, player_positions, skill_dribbling, movement_acceleration, attacking_finishing, movement_sprint_speed, skill_ball_control, attacking_short_passing
+Rows: 18483 (one row per sofifa_id, no duplicate IDs).
+No values were transformed or imputed. All original players, including goalkeepers, are retained in the distributed extract.
+Lecture correlation population: players with no GK position listed; complete cases on the six selected ability ratings.
+Ratings are FIFA game attributes, not measured performance statistics or observed salaries.
