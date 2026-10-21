@@ -12,6 +12,9 @@ Machine Learning with R course at Niigata University
 ### 002 Regression Analysis
 - [HTML](./002-regression-analysis.html)
 
+### 003 Ridge / Lasso Regression
+- [HTML](./003-ridge-lasso.html)
+
 ## 📄 その他
 - [シラバス](./R-syllabus.pdf)
 
