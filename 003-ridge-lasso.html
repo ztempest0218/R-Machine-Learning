@@ -4156,7 +4156,7 @@ OLS・Ridge・Lassoの学習</h2>
 の候補を自動的に作る。<strong><span class="math inline">\(\alpha =
 0\)</span> はRidge、<span class="math inline">\(\alpha = 1\)</span>
 はLassoを表す。</strong></p>
-<p>次に、<code>caret::train()</code>
+<p>次に、<code>train()</code>
 で三つのモデルを同じ5分割で学習・検証する。OLSには
 <code>method = &quot;lm&quot;</code>、RidgeとLassoには
 <code>method = &quot;glmnet&quot;</code>
@@ -4180,20 +4180,20 @@ OLS・Ridge・Lassoの学習</h2>
 <span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>)</span></code></pre></div>
 <p><strong>三つのモデルを同じfoldで学習・検証する</strong></p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># OLS：λを選ぶ必要はない</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>fit_ols <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">train</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>fit_ols <span class="ot">&lt;-</span> <span class="fu">train</span>(</span>
 <span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>  <span class="at">x =</span> x_train, <span class="at">y =</span> y_train,</span>
 <span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">trControl =</span> control</span>
 <span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>)</span>
 <span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a></span>
 <span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co"># Ridge</span></span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>fit_ridge <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">train</span>(</span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>fit_ridge <span class="ot">&lt;-</span> <span class="fu">train</span>(</span>
 <span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a>  <span class="at">x =</span> x_train, <span class="at">y =</span> y_train,</span>
 <span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;glmnet&quot;</span>, <span class="at">trControl =</span> control,</span>
 <span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>  <span class="at">tuneGrid =</span> ridge_grid, <span class="at">standardize =</span> <span class="cn">TRUE</span></span>
 <span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a>)</span>
 <span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a></span>
 <span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="co"># Lasso</span></span>
-<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a>fit_lasso <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">train</span>(</span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a>fit_lasso <span class="ot">&lt;-</span> <span class="fu">train</span>(</span>
 <span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a>  <span class="at">x =</span> x_train, <span class="at">y =</span> y_train,</span>
 <span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;glmnet&quot;</span>, <span class="at">trControl =</span> control,</span>
 <span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a>  <span class="at">tuneGrid =</span> lasso_grid, <span class="at">standardize =</span> <span class="cn">TRUE</span></span>

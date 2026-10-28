@@ -4,3 +4,5 @@
 .gitattributes
 *.Rmd
 grade/
+
+/hw1-webhook-relay/

@@ -3327,10 +3327,10 @@ Zeroである。2016年には世界トップ棋士に勝利している。身近
 の傾きは約0.81で、設定した真の値0.8に近い。<span class="math inline">\(x\)</span> が1増えると <span class="math inline">\(y\)</span>
 の予測値は約0.81増える、と読める。標準誤差やp値の読み方は入門編の第11回を参照してほしい。なお、統計的に有意でないことは、「効果がない」と証明されたことを意味しない。</p>
 </div>
-<div id="予測精度に注目する学習とテストに分ける" class="section level2" number="3.3">
+<div id="機械学習におけるデータの分割" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span>
-予測精度に注目する：学習とテストに分ける</h2>
-<p>次は、予測を目的として、このモデルが<strong>未知のデータも当てられるか</strong>を問う。これを確かめるために、データを学習用とテスト用に分ける。</p>
+機械学習におけるデータの分割</h2>
+<p>機械学習では、既存データへの当てはまりだけでなく、<strong>未知のデータに対する予測性能（out-of-sample performance）</strong>を重視する。これを確かめるために、データを学習用とテスト用に分ける。</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>idx   <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="at">size =</span> <span class="fu">round</span>(<span class="fl">0.7</span> <span class="sc">*</span> n))</span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>train <span class="ot">&lt;-</span> data[idx, ]   <span class="co"># 学習に使う</span></span>
