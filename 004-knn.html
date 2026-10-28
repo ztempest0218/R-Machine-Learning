@@ -2776,6 +2776,87 @@ font-variant-numeric: tabular-nums;
 white-space: pre-line;
 }
 </style>
+<style type="text/css">
+.fruit-pair {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 80px;
+max-width: 536px;
+margin: 1.5em auto 2em;
+}
+.fruit-pair figure { min-width: 0; margin: 0; text-align: center; }
+.fruit-pair figcaption { margin: 0 0 0.5em; font-size: 1.1em; }
+.fruit-photo { position: relative; width: 100%; aspect-ratio: 1; overflow: hidden; }
+.fruit-photo img {
+position: absolute;
+top: 0;
+width: 200%;
+max-width: none !important;
+height: 100%;
+display: block;
+}
+.fruit-apple img { left: 0; }
+.fruit-mandarin img { right: 0; }
+.fruit-mandarin { transform: scale(0.75); transform-origin: center 88%; }
+.fruit-neighbors table { table-layout: fixed; width: 100%; }
+.fruit-neighbors th, .fruit-neighbors td { width: 25%; text-align: center !important; }
+.fruit-neighbors tbody tr:nth-child(-n+3) > td { background-color: #ededed; }
+.fruit-distance { overflow-x: auto; margin: 1em 0; }
+.fruit-distance table { width: 100%; min-width: 740px; table-layout: fixed; }
+.fruit-distance th, .fruit-distance td { text-align: center !important; vertical-align: middle !important; }
+.fruit-distance col:nth-child(1), .fruit-distance th:nth-child(1) { width: 8%; }
+.fruit-distance col:nth-child(2), .fruit-distance th:nth-child(2) { width: 12%; }
+.fruit-distance col:nth-child(3), .fruit-distance th:nth-child(3) { width: 13%; }
+.fruit-distance col:nth-child(4), .fruit-distance th:nth-child(4) { width: 14%; }
+.fruit-distance col:nth-child(5), .fruit-distance th:nth-child(5) { width: 40%; }
+.fruit-distance col:nth-child(6), .fruit-distance th:nth-child(6) { width: 13%; }
+table.scaling-summary { width: 100%; margin: 1.4em 0; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.scaling-summary th, .scaling-summary td { padding: 10px 16px !important; text-align: right; border-bottom: 1px solid #e1e6eb; }
+.scaling-summary thead th { background: #edf2f6; color: #334a5e; }
+.scaling-summary th:first-child, .scaling-summary td:first-child { text-align: left; }
+.scaling-summary tbody tr:nth-child(even) { background: #f7f9fb; }
+.dummy-table table { width: 100%; table-layout: fixed; }
+.dummy-table th, .dummy-table td { width: 20%; text-align: center !important; }
+.dummy-table th:first-child, .dummy-table td:first-child { width: 40%; text-align: left !important; }
+.dummy-table th:nth-child(n+2), .dummy-table td:nth-child(n+2) { background-color: #ededed; }
+.dummy-table-label { width: 60%; margin-left: 40%; padding: 0 0 0.5em; text-align: center; }
+.model-types-table { overflow-x: auto; margin: 1em 0; }
+.model-types-table table { width: 100%; min-width: 800px; table-layout: fixed; }
+.model-types-table th, .model-types-table td { vertical-align: middle !important; white-space: nowrap; }
+.model-types-table th:nth-child(1) { width: 30%; }
+.model-types-table th:nth-child(2) { width: 34%; }
+.model-types-table th:nth-child(3) { width: 36%; }
+.k-choice-table table { width: 100%; table-layout: fixed; }
+.k-choice-table col:nth-child(1), .k-choice-table th:nth-child(1) { width: 10% !important; }
+.k-choice-table col:nth-child(2), .k-choice-table th:nth-child(2) { width: 42% !important; }
+.k-choice-table col:nth-child(3), .k-choice-table th:nth-child(3) { width: 48% !important; }
+.k-choice-table th, .k-choice-table td { vertical-align: top !important; }
+.personality-dictionary { overflow-x: auto; margin: 1em 0; }
+.personality-dictionary table { width: 100%; min-width: 900px; table-layout: fixed; font-size: 0.9em; }
+.personality-dictionary th, .personality-dictionary td { white-space: nowrap; vertical-align: middle !important; padding: 8px 6px !important; }
+.personality-dictionary col:nth-child(1) { width: 31% !important; }
+.personality-dictionary col:nth-child(2) { width: 26% !important; }
+.personality-dictionary col:nth-child(3) { width: 6% !important; }
+.personality-dictionary col:nth-child(4) { width: 12% !important; }
+.personality-dictionary col:nth-child(5) { width: 25% !important; }
+.personality-dictionary th:nth-child(5), .personality-dictionary td:nth-child(5) { background-color: #ededed !important; }
+.standardization-flow { display: grid; grid-template-columns: minmax(0, 1fr) 70px minmax(0, 1fr); align-items: center; gap: 12px; margin: 28px 0; text-align: center; }
+.scaling-source > p:first-child, .scaling-targets > p:first-child { margin-bottom: 18px; color: #263746; }
+.scaling-card { border: 1px solid #a4aab0; border-radius: 10px; background: #f3f3f3; padding: 16px 10px; margin: 12px 0; }
+.scaling-training { background: #edf4fb; border-color: #6693b9; color: #235b8e; }
+.scaling-validation { background: #fff4e7; border-color: #c89759; color: #94500e; }
+.scaling-test { background: #f1f7f3; border-color: #7aa98b; color: #276747; }
+.scaling-card > p:first-child { color: #21548a; font-size: 1.05em; }
+.scaling-training > p:first-child { color: #235b8e; }
+.scaling-validation > p:first-child { color: #94500e; }
+.scaling-test > p:first-child { color: #276747; }
+.scaling-card .math.display { font-size: 0.95em; }
+.scaling-connector { height: 260px; }
+@media(max-width: 700px) {
+.standardization-flow { grid-template-columns: 1fr; }
+.scaling-connector { display: none; }
+}
+</style>
 
 
 
@@ -2951,98 +3032,8 @@ border-radius: 0px;
 </div>
 
 
-<style>
-.main-container h1, .main-container h2, .main-container h3,
-.main-container h4, .main-container h5, .main-container h6,
-.main-container th, .main-container strong, .main-container b,
-.main-container dt, .main-container summary, .main-container code span {
-font-weight: 400 !important;
-}
-.main-container strong.model-type, .main-container strong.lesson-emphasis {
-font-weight: 700 !important;
-}
-.fruit-pair {
-display: grid;
-grid-template-columns: repeat(2, minmax(0, 1fr));
-gap: 80px;
-max-width: 536px;
-margin: 1.5em auto 2em;
-}
-.fruit-pair figure { min-width: 0; margin: 0; text-align: center; }
-.fruit-pair figcaption { margin: 0 0 0.5em; font-size: 1.1em; }
-.fruit-photo { position: relative; width: 100%; aspect-ratio: 1; overflow: hidden; }
-.fruit-photo img {
-position: absolute;
-top: 0;
-width: 200%;
-max-width: none !important;
-height: 100%;
-display: block;
-}
-.fruit-apple img { left: 0; }
-.fruit-mandarin img { right: 0; }
-.fruit-mandarin { transform: scale(0.75); transform-origin: center 88%; }
-.fruit-neighbors table { table-layout: fixed; width: 100%; }
-.fruit-neighbors th, .fruit-neighbors td { width: 25%; text-align: center !important; }
-.fruit-neighbors tbody tr:nth-child(-n+3) > td { background-color: #ededed; }
-.fruit-distance { overflow-x: auto; margin: 1em 0; }
-.fruit-distance table { width: 100%; min-width: 740px; table-layout: fixed; }
-.fruit-distance th, .fruit-distance td { text-align: center !important; vertical-align: middle !important; }
-.fruit-distance col:nth-child(1), .fruit-distance th:nth-child(1) { width: 8%; }
-.fruit-distance col:nth-child(2), .fruit-distance th:nth-child(2) { width: 12%; }
-.fruit-distance col:nth-child(3), .fruit-distance th:nth-child(3) { width: 13%; }
-.fruit-distance col:nth-child(4), .fruit-distance th:nth-child(4) { width: 14%; }
-.fruit-distance col:nth-child(5), .fruit-distance th:nth-child(5) { width: 40%; }
-.fruit-distance col:nth-child(6), .fruit-distance th:nth-child(6) { width: 13%; }
-table.scaling-summary { width: 100%; margin: 1.4em 0; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-.scaling-summary th, .scaling-summary td { padding: 10px 16px !important; text-align: right; border-bottom: 1px solid #e1e6eb; }
-.scaling-summary thead th { background: #edf2f6; color: #334a5e; }
-.scaling-summary th:first-child, .scaling-summary td:first-child { text-align: left; }
-.scaling-summary tbody tr:nth-child(even) { background: #f7f9fb; }
-.dummy-table table { width: 100%; table-layout: fixed; }
-.dummy-table th, .dummy-table td { width: 20%; text-align: center !important; }
-.dummy-table th:first-child, .dummy-table td:first-child { width: 40%; text-align: left !important; }
-.dummy-table th:nth-child(n+2), .dummy-table td:nth-child(n+2) { background-color: #ededed; }
-.dummy-table-label { width: 60%; margin-left: 40%; padding: 0 0 0.5em; text-align: center; }
-.model-types-table { overflow-x: auto; margin: 1em 0; }
-.model-types-table table { width: 100%; min-width: 800px; table-layout: fixed; }
-.model-types-table th, .model-types-table td { vertical-align: middle !important; white-space: nowrap; }
-.model-types-table th:nth-child(1) { width: 30%; }
-.model-types-table th:nth-child(2) { width: 34%; }
-.model-types-table th:nth-child(3) { width: 36%; }
-.k-choice-table table { width: 100%; table-layout: fixed; }
-.k-choice-table col:nth-child(1), .k-choice-table th:nth-child(1) { width: 10% !important; }
-.k-choice-table col:nth-child(2), .k-choice-table th:nth-child(2) { width: 42% !important; }
-.k-choice-table col:nth-child(3), .k-choice-table th:nth-child(3) { width: 48% !important; }
-.k-choice-table th, .k-choice-table td { vertical-align: top !important; }
-.personality-dictionary { overflow-x: auto; margin: 1em 0; }
-.personality-dictionary table { width: 100%; min-width: 900px; table-layout: fixed; font-size: 0.9em; }
-.personality-dictionary th, .personality-dictionary td { white-space: nowrap; vertical-align: middle !important; padding: 8px 6px !important; }
-.personality-dictionary col:nth-child(1) { width: 31% !important; }
-.personality-dictionary col:nth-child(2) { width: 26% !important; }
-.personality-dictionary col:nth-child(3) { width: 6% !important; }
-.personality-dictionary col:nth-child(4) { width: 12% !important; }
-.personality-dictionary col:nth-child(5) { width: 25% !important; }
-.personality-dictionary th:nth-child(5), .personality-dictionary td:nth-child(5) { background-color: #ededed !important; }
-.standardization-flow { display: grid; grid-template-columns: minmax(0, 1fr) 70px minmax(0, 1fr); align-items: center; gap: 12px; margin: 28px 0; text-align: center; }
-.scaling-source > p:first-child, .scaling-targets > p:first-child { margin-bottom: 18px; color: #263746; }
-.scaling-card { border: 1px solid #a4aab0; border-radius: 10px; background: #f3f3f3; padding: 16px 10px; margin: 12px 0; }
-.scaling-training { background: #edf4fb; border-color: #6693b9; color: #235b8e; }
-.scaling-validation { background: #fff4e7; border-color: #c89759; color: #94500e; }
-.scaling-test { background: #f1f7f3; border-color: #7aa98b; color: #276747; }
-.scaling-card > p:first-child { color: #21548a; font-size: 1.05em; }
-.scaling-training > p:first-child { color: #235b8e; }
-.scaling-validation > p:first-child { color: #94500e; }
-.scaling-test > p:first-child { color: #276747; }
-.scaling-card .math.display { font-size: 0.95em; }
-.scaling-connector { height: 260px; }
-@media(max-width: 700px) {
-.standardization-flow { grid-template-columns: 1fr; }
-.scaling-connector { display: none; }
-}
-</style>
 <hr />
-<p><strong><span style="color:blue">データのダウンロード</span></strong></p>
+<p><strong style="color:blue">データのダウンロード</strong></p>
 <p>Kaggleの内向型・外向型データを使う。保存先は、講義のプロジェクトフォルダを基準にする。</p>
 <ul>
 <li><strong>演習データ</strong>：<a href="data/personality/train.csv">train.csv</a> ／ <a href="data/personality/test.csv">test.csv</a>を
@@ -3095,13 +3086,13 @@ x+g(z)\)</span></td>
 </table>
 </div>
 <p>上の表は直感的な理解のための整理であり、厳密な数学的定義ではない。詳しく学びたい人は、確率論や数理統計学の教科書を各自で参照してほしい。</p>
-<p><strong class="model-type">パラメトリック（parametric）</strong>な回帰の例として、重回帰では次の式を使う。</p>
+<p><strong>パラメトリック（parametric）</strong>な回帰の例として、重回帰では次の式を使う。</p>
 <p><span class="math display">\[
 y_i=\beta_0+\beta_1x_{i1}+\cdots+\beta_px_{ip}+\varepsilon_i
 \]</span></p>
 <p><span class="math inline">\(y_i\)</span> は予測したい値、<span class="math inline">\(x_{i1},\ldots,x_{ip}\)</span> は説明変数、<span class="math inline">\(\beta_0,\ldots,\beta_p\)</span>
 はデータから求める係数、<span class="math inline">\(\varepsilon_i\)</span>
-は式では説明しきれない部分である。使う説明変数を変えなければ、データが100件から1000件に増えても、<strong class="lesson-emphasis">求める係数は
+は式では説明しきれない部分である。使う説明変数を変えなければ、データが100件から1000件に増えても、<strong>求める係数は
 <span class="math inline">\(p+1\)</span> 個のままである</strong>。</p>
 <p>ここで先に固定するのは、<span class="math inline">\(f\)</span>
 の具体的な値ではなく、関数形式である。たとえば、直線を使うか、二次曲線を使うかを分析者が決める。</p>
@@ -3112,10 +3103,10 @@ y_i=\beta_0+\beta_1x_{i1}+\cdots+\beta_px_{ip}+\varepsilon_i
 \end{aligned}
 \]</span></p>
 <p>パラメトリックなモデルは、関数形式を適切に設定できれば、少ないデータでも高い予測精度を得られることがある。一方、関数形式の設定を誤ると、予測が実際の値から大きく外れる可能性がある。</p>
-<p><strong class="model-type">セミパラメトリック（semiparametric）</strong>は、関数形式をあらかじめ決める部分と、特定の関数形式に限定せずデータから学ぶ部分を組み合わせる考え方である。表の例では、<span class="math inline">\(x\)</span> との関係は直線と決め、<span class="math inline">\(z\)</span> との関係は <span class="math inline">\(g(z)\)</span>
+<p><strong>セミパラメトリック（semiparametric）</strong>は、関数形式をあらかじめ決める部分と、特定の関数形式に限定せずデータから学ぶ部分を組み合わせる考え方である。表の例では、<span class="math inline">\(x\)</span> との関係は直線と決め、<span class="math inline">\(z\)</span> との関係は <span class="math inline">\(g(z)\)</span>
 で柔軟に表す。これは回帰の一例であり、この考え方は回帰以外にも使われる。</p>
-<p><strong class="model-type">ノンパラメトリック（nonparametric）</strong>は、関数形式を直線や二次曲線などにあらかじめ限定せず、データから関係を学ぶ方法である。パラメトリックでは、先に決めた関数形式の係数を求める。ノンパラメトリックでは、データ全体の関係を決まった個数の係数だけにまとめず、データに応じて関係を捉える。ただし、学習のルールや調整する設定は必要である。</p>
-<p>利点は、<strong class="lesson-emphasis">関数形式の制約が少なく、線形関係に限らず複雑な関係にも柔軟に対応できる</strong>ことである。一方、複雑な関係を学ぶには十分なデータが必要で、データが少ない領域では予測が不安定になりやすい。また、関係を一つの共通の係数で説明しにくい。ただし、k-NNに変えても、多重共線性や高次元性の問題が自動的に解決するわけではない。</p>
+<p><strong>ノンパラメトリック（nonparametric）</strong>は、関数形式を直線や二次曲線などにあらかじめ限定せず、データから関係を学ぶ方法である。パラメトリックでは、先に決めた関数形式の係数を求める。ノンパラメトリックでは、データ全体の関係を決まった個数の係数だけにまとめず、データに応じて関係を捉える。ただし、学習のルールや調整する設定は必要である。</p>
+<p>利点は、<strong>関数形式の制約が少なく、線形関係に限らず複雑な関係にも柔軟に対応できる</strong>ことである。一方、複雑な関係を学ぶには十分なデータが必要で、データが少ない領域では予測が不安定になりやすい。また、関係を一つの共通の係数で説明しにくい。ただし、k-NNに変えても、多重共線性や高次元性の問題が自動的に解決するわけではない。</p>
 <p>これまで学んだ線形回帰・Ridge・Lassoは、いずれも関数形式をあらかじめ設定するパラメトリックな手法である。Lassoは一部の係数を0にできるが、候補となる変数や二乗項・交差項などは分析者が先に用意する。今回は、これらとノンパラメトリックなk近傍法の違いを考える。</p>
 </div>
 <div id="k近傍法k-nn" class="section level1" number="2">
@@ -3304,7 +3295,7 @@ d(\vec{x}_a,\vec{x}_b)
 <h2><span class="header-section-number">2.3</span>
 特徴量エンジニアリング</h2>
 <p>Rでは因子型 <code>factor</code>
-が自動で数値化されることもあるが、処理は関数や入力方法によって異なる。特徴量エンジニアリングでは、<strong class="lesson-emphasis" style="color: red;">自動処理に任せきりにせず、変数の型や変換結果を自分で確認する</strong>ことが大切である。</p>
+が自動で数値化されることもあるが、処理は関数や入力方法によって異なる。特徴量エンジニアリングでは、<strong style="color: red;">自動処理に任せきりにせず、変数の型や変換結果を自分で確認する</strong>ことが大切である。</p>
 <p>ダミー変数の基本については、Wooldridge『Introductory Econometrics: A
 Modern Approach』（第7版）の第7章「Multiple Regression Analysis with
 Qualitative Information」を参照してほしい。</p>
@@ -3313,11 +3304,11 @@ Qualitative Information」を参照してほしい。</p>
 <p>機械学習では、ユークリッド距離や二乗誤差のように、差を二乗して足し合わせる計算をよく使う。データの情報が同じでも、測定単位を変えるだけで数値の大きさが変わり、説明変数ごとの距離への影響も変わる。そこで、距離計算に使う数値型の特徴量
 <span class="math inline">\(X\)</span>
 の尺度をそろえる。代表的な方法として、次の2つがある。</p>
-<p><strong class="lesson-emphasis">z-score標準化</strong>は、前回のRidge・Lasso回帰でも使った方法である。各変数から平均を引き、標準偏差で割る。学習データでは、平均が0、標準偏差が1になる。初級統計で学んだ、正規分布に従う変数から平均を引き、標準偏差で割って標準正規分布に変換する操作と同じ考え方である。</p>
+<p><strong>z-score標準化</strong>は、前回のRidge・Lasso回帰でも使った方法である。各変数から平均を引き、標準偏差で割る。学習データでは、平均が0、標準偏差が1になる。初級統計で学んだ、正規分布に従う変数から平均を引き、標準偏差で割って標準正規分布に変換する操作と同じ考え方である。</p>
 <p><span class="math display">\[
 z_{ij}=\frac{x_{ij}-\bar{x}_{j,\mathrm{train}}}{s_{j,\mathrm{train}}}
 \]</span></p>
-<p><strong class="lesson-emphasis">min-max正規化</strong>は、各変数の最小値を0、最大値を1にそろえる方法である。学習データの値は0〜1の範囲になる。</p>
+<p><strong>min-max正規化</strong>は、各変数の最小値を0、最大値を1にそろえる方法である。学習データの値は0〜1の範囲になる。</p>
 <p><span class="math display">\[
 x_{\mathrm{new}}=\frac{x_{ij}-x_{j,\min}}{x_{j,\max}-x_{j,\min}}
 \]</span></p>
@@ -3415,7 +3406,7 @@ x_{\mathrm{new}}=\frac{x_{ij}-x_{j,\min}}{x_{j,\max}-x_{j,\min}}
 の1、2、3は、それぞれ「赤」「緑」「オレンジ」を区別する番号であり、順序を表すものではない。</p>
 <div class="dummy-table">
 <div class="dummy-table-label">
-<strong class="lesson-emphasis">カテゴリ変数を複数のダミーで表現</strong>
+<strong>カテゴリ変数を複数のダミーで表現</strong>
 </div>
 <table>
 <thead>
@@ -3497,13 +3488,13 @@ x_{\mathrm{new}}=\frac{x_{ij}-x_{j,\min}}{x_{j,\max}-x_{j,\min}}
 <li>近傍の <span class="math inline">\(y\)</span>
 の多数決（分類）または平均（回帰）で予測する。</li>
 </ol>
-<p><strong class="lesson-emphasis">補完値や標準化の平均・標準偏差は、必ずデータを分割した後、学習データだけから求める。</strong>分割前に全データから求めると、検証・テストデータの情報が入り、情報漏洩が起こる。交差検証でも、各foldの学習部分だけで前処理の基準を求める。（ただし、明らかな表記ミスの修正や変数の型の変換など、標本から求める統計量に依存しない処理は、データの分割前に行ってよい。）</p>
+<p><strong>補完値や標準化の平均・標準偏差は、必ずデータを分割した後、学習データだけから求める。</strong>分割前に全データから求めると、検証・テストデータの情報が入り、情報漏洩が起こる。交差検証でも、各foldの学習部分だけで前処理の基準を求める。（ただし、明らかな表記ミスの修正や変数の型の変換など、標本から求める統計量に依存しない処理は、データの分割前に行ってよい。）</p>
 <div id="kの選択と評価" class="section level3" number="2.5.1">
 <h3><span class="header-section-number">2.5.1</span> kの選択と評価</h3>
 <p>kはハイパーパラメータである。経験則として、学習データの件数を <span class="math inline">\(n\)</span> として <span class="math inline">\(k\approx\sqrt{n}\)</span>
 を目安に決める方法もある。ただし、この目安が最適とは限らないため、本講義では前回のRidge・Lasso回帰における
 <span class="math inline">\(\lambda\)</span>
-と同じく、<strong class="lesson-emphasis">交差検証</strong>で未知データへの予測性能を評価して決める。</p>
+と同じく、<strong>交差検証</strong>で未知データへの予測性能を評価して決める。</p>
 <div class="k-choice-table">
 <table>
 <colgroup>
@@ -3543,7 +3534,7 @@ x_{\mathrm{new}}=\frac{x_{ij}-x_{j,\min}}{x_{j,\max}-x_{j,\min}}
 <h3><span class="header-section-number">2.5.2</span>
 特徴量と計算上の注意点</h3>
 <p>k近傍法の予測は、特徴量から計算する距離に左右される。そのため、2.3節で学んだ特徴量エンジニアリングが重要になる。標準化やダミー変数化に加え、使う特徴量も確認する必要がある。</p>
-<p>情報の重複を<strong class="lesson-emphasis">特徴量の冗長性（Redundancy）</strong>という。多重共線性が線形関係を指すのに対し、冗長性には非線形の重複も含まれる。たとえば「重量（g）」と「重量（kg）」を両方使うと、標準化しても重量の情報を距離に2回分数えることになる。線形回帰からk近傍法に変えても、こうしたデータの問題は消えない。</p>
+<p>情報の重複を<strong>特徴量の冗長性（Redundancy）</strong>という。多重共線性が線形関係を指すのに対し、冗長性には非線形の重複も含まれる。たとえば「重量（g）」と「重量（kg）」を両方使うと、標準化しても重量の情報を距離に2回分数えることになる。線形回帰からk近傍法に変えても、こうしたデータの問題は消えない。</p>
 <p>また、特徴量が多すぎると、同じデータ数でも近い観測を見つけにくくなる（次元の呪い）。不要な特徴量を減らすことも大切である。予測時には学習データを参照するため、データが大きいと計算時間や保存容量も必要になる。</p>
 </div>
 </div>
@@ -3694,8 +3685,8 @@ recipeによる一括データ処理</h2>
 <code>recipes</code>
 パッケージを使い、変数の型に応じた前処理をまとめて定義する。</p>
 <p><code>recipes</code>
-では、<strong class="lesson-emphasis">欠損値の補完、標準化、ダミー変数化</strong>、変動しない変数の削除などを、<code>step_</code>
-で始まる関数で順に指定できる。数値の特徴量だけ、カテゴリの特徴量だけをまとめて選べるため、<u>列名を一つずつ指定する必要がない</u>。<strong class="lesson-emphasis" style="color: red;">学習データで求めた処理の基準は、検証・テストデータにも適用できる。</strong></p>
+では、<strong>欠損値の補完、標準化、ダミー変数化</strong>、変動しない変数の削除などを、<code>step_</code>
+で始まる関数で順に指定できる。数値の特徴量だけ、カテゴリの特徴量だけをまとめて選べるため、<u>列名を一つずつ指定する必要がない</u>。<strong style="color: red;">学習データで求めた処理の基準は、検証・テストデータにも適用できる。</strong></p>
 <p>よく使う <code>step_</code>
 関数には、次のものがある。括弧内には処理したい変数を指定する。</p>
 <table>
@@ -3781,7 +3772,7 @@ recipeによる一括データ処理</h2>
 <span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>(), <span class="at">one_hot =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>  <span class="co"># 変動しない変数を除く</span></span>
 <span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>  <span class="fu">step_zv</span>(<span class="fu">all_predictors</span>())</span></code></pre></div>
-<p><strong class="lesson-emphasis">ここでは前処理の手順だけを定義し、まだ補完や標準化は実行しない。</strong>中央値・最頻値・平均・標準偏差は、データを分割した後、交差検証の各学習部分から求める。評価用データを含めて先に計算すると、情報漏洩が起こる。なお、標準化をダミー変数化より先に指定しているため、生成した0と1には標準化を適用しない。</p>
+<p><strong>ここでは前処理の手順だけを定義し、まだ補完や標準化は実行しない。</strong>中央値・最頻値・平均・標準偏差は、データを分割した後、交差検証の各学習部分から求める。評価用データを含めて先に計算すると、情報漏洩が起こる。なお、標準化をダミー変数化より先に指定しているため、生成した0と1には標準化を適用しない。</p>
 <div class="standardization-flow">
 <div class="scaling-source">
 <p>学習データだけから計算</p>
@@ -3820,7 +3811,7 @@ z_i^{\mathrm{test}}=
 </div>
 </div>
 </div>
-<p>recipeは便利だが、内部の処理が見えにくいため、その仕組みを理解しておくことが重要である。自分でほかの関数を使って標準化する場合も、学習データから各変数の平均・標準偏差を求め、オブジェクトとして保存し、検証・テストデータにも同じ値を使う。交差検証では、各foldの学習部分から求める。<strong class="lesson-emphasis">検証・テストデータをそれぞれ自身の平均・標準偏差でz-scoreに変換してしまうのは、よくある誤りである。</strong></p>
+<p>recipeは便利だが、内部の処理が見えにくいため、その仕組みを理解しておくことが重要である。自分でほかの関数を使って標準化する場合も、学習データから各変数の平均・標準偏差を求め、オブジェクトとして保存し、検証・テストデータにも同じ値を使う。交差検証では、各foldの学習部分から求める。<strong>検証・テストデータをそれぞれ自身の平均・標準偏差でz-scoreに変換してしまうのは、よくある誤りである。</strong></p>
 </div>
 <div id="交差検証用のデータとfoldを準備する" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span>
@@ -3848,7 +3839,7 @@ z_i^{\mathrm{test}}=
 <h2><span class="header-section-number">3.4</span>
 交差検証でkを選ぶ</h2>
 <p><code>caret</code> パッケージの <code>train()</code>
-関数に<strong class="lesson-emphasis" style="color: red;">前処理の手順
+関数に<strong style="color: red;">前処理の手順
 <code style="color: inherit; font-weight: inherit;">rec</code></strong>
 と5分割の設定 <code>control</code>
 を渡し、検証用正解率が最も高いkを選ぶ。最頻値だけで予測する
@@ -3865,7 +3856,7 @@ z_i^{\mathrm{test}}=
 で比較するkの候補を指定する。<code>Accuracy</code>
 は5回の正解率の平均、<code>AccuracySD</code>
 はその標準偏差である。選ばれたkを使い、学習用データ全体で前処理とモデルが作られる。</p>
-<p>今回は結果変数yが内向型・外向型のカテゴリなので、予測したクラスが正解と一致した割合である<strong class="lesson-emphasis">正解率（accuracy）</strong>を使う。前回の住宅価格のように数値を予測する回帰では、予測値と実際の値の差を使った平均二乗誤差（MSE）などで評価できる。なお、分類でも予測確率を評価する場合には、二乗誤差を使う方法がある。</p>
+<p>今回は結果変数yが内向型・外向型のカテゴリなので、予測したクラスが正解と一致した割合である<strong>正解率（accuracy）</strong>を使う。前回の住宅価格のように数値を予測する回帰では、予測値と実際の値の差を使った平均二乗誤差（MSE）などで評価できる。なお、分類でも予測確率を評価する場合には、二乗誤差を使う方法がある。</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># 最頻値を全員に予測する基準モデル</span></span>
 <span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>majority_fit <span class="ot">&lt;-</span> <span class="fu">train</span>(</span>
 <span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>  rec,</span>
@@ -4067,17 +4058,17 @@ Desktopのインストール</strong><br />
 <p><strong>GitHubの2段階認証の設定</strong><br />
 <u>すでに設定済みの場合は、この手順を飛ばしてよい。</u><br />
 <a href="https://drive.google.com/file/d/1l3gKPgRnLeF7Mp9-EoZ6ifHqczD7z6R3/view?usp=sharing" class="uri">https://drive.google.com/file/d/1l3gKPgRnLeF7Mp9-EoZ6ifHqczD7z6R3/view?usp=sharing</a></p>
-<p><strong class="lesson-emphasis">To-do</strong></p>
+<p><strong>To-do</strong></p>
 <ol style="list-style-type: decimal">
-<li><strong class="lesson-emphasis">Classmojiのクラスに参加</strong><br />
+<li><strong>Classmojiのクラスに参加</strong><br />
 <a href="HW1_%E5%AD%A6%E7%94%9F%E5%90%91%E3%81%91%E6%93%8D%E4%BD%9C%E3%82%AC%E3%82%A4%E3%83%89.docx">HW1
 学生向け操作ガイド</a></li>
-<li><strong class="lesson-emphasis">課題に取り組み、GitHubにpushする</strong><br />
+<li><strong>課題に取り組み、GitHubにpushする</strong><br />
 提出方法はR入門のサイトの下方を参照すること。<br />
 <a href="https://ztempest0218.github.io/R-Programming/" class="uri">https://ztempest0218.github.io/R-Programming/</a></li>
 </ol>
-<p><strong class="lesson-emphasis">HW1 ダイヤモンド価格予測</strong></p>
-<p><strong class="lesson-emphasis">締切：2026年11月11日（水）16:30（日本時間）</strong></p>
+<p><strong>HW1 ダイヤモンド価格予測</strong></p>
+<p><strong>締切：2026年11月11日（水）16:30（日本時間）</strong></p>
 </div>
 
 

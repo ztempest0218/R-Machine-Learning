@@ -1,0 +1,80 @@
+/* Layouts specific to the k-NN lesson. */
+.fruit-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 80px;
+  max-width: 536px;
+  margin: 1.5em auto 2em;
+}
+.fruit-pair figure { min-width: 0; margin: 0; text-align: center; }
+.fruit-pair figcaption { margin: 0 0 0.5em; font-size: 1.1em; }
+.fruit-photo { position: relative; width: 100%; aspect-ratio: 1; overflow: hidden; }
+.fruit-photo img {
+  position: absolute;
+  top: 0;
+  width: 200%;
+  max-width: none !important;
+  height: 100%;
+  display: block;
+}
+.fruit-apple img { left: 0; }
+.fruit-mandarin img { right: 0; }
+.fruit-mandarin { transform: scale(0.75); transform-origin: center 88%; }
+.fruit-neighbors table { table-layout: fixed; width: 100%; }
+.fruit-neighbors th, .fruit-neighbors td { width: 25%; text-align: center !important; }
+.fruit-neighbors tbody tr:nth-child(-n+3) > td { background-color: #ededed; }
+.fruit-distance { overflow-x: auto; margin: 1em 0; }
+.fruit-distance table { width: 100%; min-width: 740px; table-layout: fixed; }
+.fruit-distance th, .fruit-distance td { text-align: center !important; vertical-align: middle !important; }
+.fruit-distance col:nth-child(1), .fruit-distance th:nth-child(1) { width: 8%; }
+.fruit-distance col:nth-child(2), .fruit-distance th:nth-child(2) { width: 12%; }
+.fruit-distance col:nth-child(3), .fruit-distance th:nth-child(3) { width: 13%; }
+.fruit-distance col:nth-child(4), .fruit-distance th:nth-child(4) { width: 14%; }
+.fruit-distance col:nth-child(5), .fruit-distance th:nth-child(5) { width: 40%; }
+.fruit-distance col:nth-child(6), .fruit-distance th:nth-child(6) { width: 13%; }
+table.scaling-summary { width: 100%; margin: 1.4em 0; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.scaling-summary th, .scaling-summary td { padding: 10px 16px !important; text-align: right; border-bottom: 1px solid #e1e6eb; }
+.scaling-summary thead th { background: #edf2f6; color: #334a5e; }
+.scaling-summary th:first-child, .scaling-summary td:first-child { text-align: left; }
+.scaling-summary tbody tr:nth-child(even) { background: #f7f9fb; }
+.dummy-table table { width: 100%; table-layout: fixed; }
+.dummy-table th, .dummy-table td { width: 20%; text-align: center !important; }
+.dummy-table th:first-child, .dummy-table td:first-child { width: 40%; text-align: left !important; }
+.dummy-table th:nth-child(n+2), .dummy-table td:nth-child(n+2) { background-color: #ededed; }
+.dummy-table-label { width: 60%; margin-left: 40%; padding: 0 0 0.5em; text-align: center; }
+.model-types-table { overflow-x: auto; margin: 1em 0; }
+.model-types-table table { width: 100%; min-width: 800px; table-layout: fixed; }
+.model-types-table th, .model-types-table td { vertical-align: middle !important; white-space: nowrap; }
+.model-types-table th:nth-child(1) { width: 30%; }
+.model-types-table th:nth-child(2) { width: 34%; }
+.model-types-table th:nth-child(3) { width: 36%; }
+.k-choice-table table { width: 100%; table-layout: fixed; }
+.k-choice-table col:nth-child(1), .k-choice-table th:nth-child(1) { width: 10% !important; }
+.k-choice-table col:nth-child(2), .k-choice-table th:nth-child(2) { width: 42% !important; }
+.k-choice-table col:nth-child(3), .k-choice-table th:nth-child(3) { width: 48% !important; }
+.k-choice-table th, .k-choice-table td { vertical-align: top !important; }
+.personality-dictionary { overflow-x: auto; margin: 1em 0; }
+.personality-dictionary table { width: 100%; min-width: 900px; table-layout: fixed; font-size: 0.9em; }
+.personality-dictionary th, .personality-dictionary td { white-space: nowrap; vertical-align: middle !important; padding: 8px 6px !important; }
+.personality-dictionary col:nth-child(1) { width: 31% !important; }
+.personality-dictionary col:nth-child(2) { width: 26% !important; }
+.personality-dictionary col:nth-child(3) { width: 6% !important; }
+.personality-dictionary col:nth-child(4) { width: 12% !important; }
+.personality-dictionary col:nth-child(5) { width: 25% !important; }
+.personality-dictionary th:nth-child(5), .personality-dictionary td:nth-child(5) { background-color: #ededed !important; }
+.standardization-flow { display: grid; grid-template-columns: minmax(0, 1fr) 70px minmax(0, 1fr); align-items: center; gap: 12px; margin: 28px 0; text-align: center; }
+.scaling-source > p:first-child, .scaling-targets > p:first-child { margin-bottom: 18px; color: #263746; }
+.scaling-card { border: 1px solid #a4aab0; border-radius: 10px; background: #f3f3f3; padding: 16px 10px; margin: 12px 0; }
+.scaling-training { background: #edf4fb; border-color: #6693b9; color: #235b8e; }
+.scaling-validation { background: #fff4e7; border-color: #c89759; color: #94500e; }
+.scaling-test { background: #f1f7f3; border-color: #7aa98b; color: #276747; }
+.scaling-card > p:first-child { color: #21548a; font-size: 1.05em; }
+.scaling-training > p:first-child { color: #235b8e; }
+.scaling-validation > p:first-child { color: #94500e; }
+.scaling-test > p:first-child { color: #276747; }
+.scaling-card .math.display { font-size: 0.95em; }
+.scaling-connector { height: 260px; }
+@media(max-width: 700px) {
+  .standardization-flow { grid-template-columns: 1fr; }
+  .scaling-connector { display: none; }
+}
