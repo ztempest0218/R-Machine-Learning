@@ -15,6 +15,9 @@ Machine Learning with R course at Niigata University
 ### 003 Ridge / Lasso Regression
 - [HTML](./003-ridge-lasso.html)
 
+### 004 k-Nearest Neighbors
+- [HTML](./004-knn.html)
+
 ## 📄 その他
 - [シラバス](./R-syllabus.pdf)
 

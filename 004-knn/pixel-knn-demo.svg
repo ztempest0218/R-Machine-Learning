@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 440" role="img" aria-labelledby="title desc">
+<title id="title">ピクセルの数値からk-NNで数字を分類する</title>
+<desc id="desc">架空の5行3列の二値画像を15個の特徴量として比較する。近い5枚は3が3票、8が2票で、予測は3。</desc>
+<rect width="1100" height="440" fill="white"/>
+<style>text{font-family:"Hiragino Sans","Noto Sans JP",sans-serif;fill:#293540} .head{font-size:21px} .small{font-size:16px}</style>
+<text x="110" y="42" text-anchor="middle" class="head">① 数字の画像</text>
+<rect x="56" y="85" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<rect x="92" y="85" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<rect x="128" y="85" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<rect x="56" y="121" width="36" height="36" fill="#fff" stroke="#bdc7ce"/>
+<rect x="92" y="121" width="36" height="36" fill="#fff" stroke="#bdc7ce"/>
+<rect x="128" y="121" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<rect x="56" y="157" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<rect x="92" y="157" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<rect x="128" y="157" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<rect x="56" y="193" width="36" height="36" fill="#fff" stroke="#bdc7ce"/>
+<rect x="92" y="193" width="36" height="36" fill="#fff" stroke="#bdc7ce"/>
+<rect x="128" y="193" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<rect x="56" y="229" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<rect x="92" y="229" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<rect x="128" y="229" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<text x="110" y="300" text-anchor="middle" class="small">5 × 3 ピクセル</text>
+<text x="335" y="42" text-anchor="middle" class="head">② 数値に変換</text>
+<rect x="281" y="85" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<text x="299.0" y="109.48" text-anchor="middle" font-size="18" style="fill:#fff">1</text>
+<rect x="317" y="85" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<text x="335.0" y="109.48" text-anchor="middle" font-size="18" style="fill:#fff">1</text>
+<rect x="353" y="85" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<text x="371.0" y="109.48" text-anchor="middle" font-size="18" style="fill:#fff">1</text>
+<rect x="281" y="121" width="36" height="36" fill="#fff" stroke="#bdc7ce"/>
+<text x="299.0" y="145.48" text-anchor="middle" font-size="18" style="fill:#6b7780">0</text>
+<rect x="317" y="121" width="36" height="36" fill="#fff" stroke="#bdc7ce"/>
+<text x="335.0" y="145.48" text-anchor="middle" font-size="18" style="fill:#6b7780">0</text>
+<rect x="353" y="121" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<text x="371.0" y="145.48" text-anchor="middle" font-size="18" style="fill:#fff">1</text>
+<rect x="281" y="157" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<text x="299.0" y="181.48" text-anchor="middle" font-size="18" style="fill:#fff">1</text>
+<rect x="317" y="157" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<text x="335.0" y="181.48" text-anchor="middle" font-size="18" style="fill:#fff">1</text>
+<rect x="353" y="157" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<text x="371.0" y="181.48" text-anchor="middle" font-size="18" style="fill:#fff">1</text>
+<rect x="281" y="193" width="36" height="36" fill="#fff" stroke="#bdc7ce"/>
+<text x="299.0" y="217.48" text-anchor="middle" font-size="18" style="fill:#6b7780">0</text>
+<rect x="317" y="193" width="36" height="36" fill="#fff" stroke="#bdc7ce"/>
+<text x="335.0" y="217.48" text-anchor="middle" font-size="18" style="fill:#6b7780">0</text>
+<rect x="353" y="193" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<text x="371.0" y="217.48" text-anchor="middle" font-size="18" style="fill:#fff">1</text>
+<rect x="281" y="229" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<text x="299.0" y="253.48" text-anchor="middle" font-size="18" style="fill:#fff">1</text>
+<rect x="317" y="229" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<text x="335.0" y="253.48" text-anchor="middle" font-size="18" style="fill:#fff">1</text>
+<rect x="353" y="229" width="36" height="36" fill="#263746" stroke="#bdc7ce"/>
+<text x="371.0" y="253.48" text-anchor="middle" font-size="18" style="fill:#fff">1</text>
+<text x="335" y="300" text-anchor="middle" class="small">白＝0 ／ 黒＝1</text>
+<text x="335" y="330" text-anchor="middle" class="small">15個の数値が特徴量X</text>
+<text x="235" y="185" text-anchor="middle" class="head">→</text>
+<text x="455" y="185" text-anchor="middle" class="head">→</text>
+<text x="785" y="42" text-anchor="middle" class="head">③ 距離が近い5枚を選ぶ（k＝5）</text>
+<rect x="508" y="106" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="532" y="106" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="556" y="106" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="508" y="130" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="532" y="130" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="556" y="130" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="508" y="154" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="532" y="154" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="556" y="154" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="508" y="178" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="532" y="178" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="556" y="178" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="508" y="202" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="532" y="202" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="556" y="202" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<text x="544" y="258" text-anchor="middle" class="small">正解：3</text>
+<text x="544" y="286" text-anchor="middle" class="small">距離：0.00</text>
+<rect x="624" y="106" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="648" y="106" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="672" y="106" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="624" y="130" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="648" y="130" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="672" y="130" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="624" y="154" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="648" y="154" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="672" y="154" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="624" y="178" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="648" y="178" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="672" y="178" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="624" y="202" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="648" y="202" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="672" y="202" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<text x="660" y="258" text-anchor="middle" class="small">正解：3</text>
+<text x="660" y="286" text-anchor="middle" class="small">距離：1.00</text>
+<rect x="740" y="106" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="764" y="106" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="788" y="106" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="740" y="130" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="764" y="130" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="788" y="130" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="740" y="154" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="764" y="154" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="788" y="154" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="740" y="178" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="764" y="178" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="788" y="178" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="740" y="202" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="764" y="202" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="788" y="202" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<text x="776" y="258" text-anchor="middle" class="small">正解：8</text>
+<text x="776" y="286" text-anchor="middle" class="small">距離：1.41</text>
+<rect x="856" y="106" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="880" y="106" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="904" y="106" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="856" y="130" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="880" y="130" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="904" y="130" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="856" y="154" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="880" y="154" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="904" y="154" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="856" y="178" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="880" y="178" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="904" y="178" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="856" y="202" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="880" y="202" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="904" y="202" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<text x="892" y="258" text-anchor="middle" class="small">正解：3</text>
+<text x="892" y="286" text-anchor="middle" class="small">距離：1.73</text>
+<rect x="972" y="106" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="996" y="106" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="1020" y="106" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="972" y="130" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="996" y="130" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="1020" y="130" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="972" y="154" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="996" y="154" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="1020" y="154" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="972" y="178" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="996" y="178" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="1020" y="178" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="972" y="202" width="24" height="24" fill="#fff" stroke="#bdc7ce"/>
+<rect x="996" y="202" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<rect x="1020" y="202" width="24" height="24" fill="#263746" stroke="#bdc7ce"/>
+<text x="1008" y="258" text-anchor="middle" class="small">正解：8</text>
+<text x="1008" y="286" text-anchor="middle" class="small">距離：2.00</text>
+<text x="785" y="340" text-anchor="middle" class="head">④ 多数決：3が3票 ／ 8が2票</text>
+<text x="785" y="383" text-anchor="middle" class="head" style="fill:#21548a">予測：3</text>
+
+</svg>
