@@ -1,0 +1,192 @@
+<style>
+#purchase-loss-demo { margin: 20px 0; padding: 18px 0; color: #343d46; }
+#purchase-loss-demo * { box-sizing: border-box; }
+#purchase-loss-demo p { margin: 8px 0; }
+#purchase-loss-demo button { border: 1px solid #aebcc9; border-radius: 3px; background: white; color: #21548a; padding: 7px 12px; font: inherit; cursor: pointer; }
+#purchase-loss-demo button[aria-pressed="true"] { background: #21548a; color: white; border-color: #21548a; }
+#purchase-loss-demo button:focus-visible, #purchase-loss-demo input:focus-visible { outline: 3px solid #c06424; outline-offset: 3px; }
+#purchase-loss-demo .loss-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 14px; }
+#purchase-loss-demo .loss-note { font-size: .88em; color: #526171; }
+#purchase-loss-demo .loss-observed { display: flex; height: 26px; width: 100%; margin: 8px 0 6px; overflow: hidden; }
+#purchase-loss-demo .loss-bought { background: #c06424; }
+#purchase-loss-demo .loss-unbought { background: #657584; }
+#purchase-loss-demo .loss-control { margin: 18px 0; border-top: 1px solid #dbe2e8; padding-top: 14px; }
+#purchase-loss-demo label { font-weight: 400; display: block; }
+#purchase-loss-demo output { display: inline; color: inherit; font: inherit; padding: 0; }
+#purchase-loss-demo .loss-probability { color: #21548a; font-size: 24px; }
+#purchase-loss-demo input[type="range"] { width: 100%; accent-color: #21548a; margin: 10px 0; }
+#purchase-loss-demo .loss-layout { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+#purchase-loss-demo .loss-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 12px; margin: 8px 0; border-left: 4px solid #c06424; background: #fbf3ed; }
+#purchase-loss-demo .loss-row.unbought { border-left-color: #657584; background: #f1f4f6; }
+#purchase-loss-demo .loss-row p { margin: 2px 0; }
+#purchase-loss-demo .loss-value { font-size: 20px; }
+#purchase-loss-demo .loss-row .loss-count { grid-column: 1 / -1; margin-bottom: 4px; }
+#purchase-loss-demo .loss-contribution { margin: 15px 0 8px; }
+#purchase-loss-demo .loss-bar-track { width: 100%; background: #edf1f4; height: 18px; display: flex; margin: 7px 0 2px; }
+#purchase-loss-demo .loss-bar-track span { display: block; height: 100%; }
+#purchase-loss-demo .loss-bar-labels { display: flex; justify-content: space-between; font-size: 12px; color: #526171; }
+#purchase-loss-demo .loss-total { margin: 15px 0 5px; font-size: 20px; color: #21548a; }
+#purchase-loss-demo .loss-total strong { font-size: 29px; font-weight: 700 !important; }
+#purchase-loss-demo .loss-chart { display: block; width: 100%; max-width: 420px; height: auto; margin: 5px auto; }
+#purchase-loss-demo .loss-chart text { font-family: sans-serif; }
+#purchase-loss-demo .loss-chart-caption { text-align: center; }
+#purchase-loss-demo .loss-status { padding: 10px 12px; background: #f1f5f8; margin-top: 16px; }
+#purchase-loss-demo .loss-orange { color: #a44e15; }
+#purchase-loss-demo .loss-gray { color: #526171; }
+@media(max-width: 760px) {
+  #purchase-loss-demo .loss-layout { grid-template-columns: 1fr; }
+}
+</style>
+
+<div id="purchase-loss-demo">
+<p>同じA・B・Cで、<strong class="lesson-emphasis">実際の人数は固定し、予測する確率だけを変える。</strong></p>
+<div class="loss-buttons" role="group" aria-label="購入データのグループを選ぶ">
+<button type="button" data-loss-group="A" aria-pressed="false">A：購入20人</button>
+<button type="button" data-loss-group="B" aria-pressed="false">B：購入50人</button>
+<button type="button" data-loss-group="C" aria-pressed="true">C：購入80人</button>
+</div>
+<p id="loss-observed-label">C：購入80人・未購入20人（100人）</p>
+<div class="loss-observed" id="loss-observed-bar" role="img" aria-label="実際の購入割合80%、未購入割合20%">
+<span class="loss-bought" id="loss-observed-bought" style="width:80%"></span>
+<span class="loss-unbought" id="loss-observed-unbought" style="width:20%"></span>
+</div>
+<p class="loss-note"><span class="loss-orange">■ 購入（y = 1）</span>　<span class="loss-gray">■ 未購入（y = 0）</span></p>
+
+<div class="loss-control">
+<label for="loss-predicted-probability">全員に予測する購入確率 p：<output class="loss-probability" id="loss-predicted-label">80%</output></label>
+<input id="loss-predicted-probability" type="range" min="1" max="99" step="1" value="80">
+<div class="loss-buttons" role="group" aria-label="予測確率の例を選ぶ">
+<button type="button" data-loss-preset="50" aria-pressed="false">50%</button>
+<button type="button" data-loss-preset="observed" aria-pressed="true" id="loss-observed-preset">購入割合と同じ：80%</button>
+<button type="button" data-loss-preset="99" aria-pressed="false">99%</button>
+</div>
+</div>
+
+<div class="loss-layout">
+<div>
+<p><strong class="lesson-emphasis">① 実際の結果に与えた確率を採点する</strong></p>
+<div class="loss-row">
+<p class="loss-count" id="loss-bought-count">購入した80人（y = 1）</p>
+<div><p class="loss-note">購入の確率 p</p><p class="loss-value" id="loss-bought-probability">0.80</p></div>
+<div><p class="loss-note">1人の損失 −log(p)</p><p class="loss-value" id="loss-bought-unit">0.223</p></div>
+</div>
+<div class="loss-row unbought">
+<p class="loss-count" id="loss-unbought-count">未購入の20人（y = 0）</p>
+<div><p class="loss-note">未購入の確率 1 − p</p><p class="loss-value" id="loss-unbought-probability">0.20</p></div>
+<div><p class="loss-note">1人の損失 −log(1 − p)</p><p class="loss-value" id="loss-unbought-unit">1.609</p></div>
+</div>
+<div class="loss-contribution">
+<p><strong class="lesson-emphasis">② 人数を掛け、全員で平均する</strong></p>
+<p class="loss-note" id="loss-average-calculation">(80 × 0.223 ＋ 20 × 1.609) ÷ 100</p>
+<p id="loss-contribution-values"><span class="loss-orange">購入分 0.179</span> ＋ <span class="loss-gray">未購入分 0.322</span></p>
+<div class="loss-bar-track" id="loss-contribution-bar" role="img" aria-label="平均損失への寄与：購入分0.179、未購入分0.322">
+<span class="loss-bought" id="loss-contribution-bought" style="width:3.88%"></span>
+<span class="loss-unbought" id="loss-contribution-unbought" style="width:6.99%"></span>
+</div>
+<div class="loss-bar-labels"><span>0</span><span>4.605（共通の目盛り）</span></div>
+<p class="loss-total">Log Loss ＝ <strong><output id="loss-mean-value">0.500</output></strong></p>
+<p class="loss-note">小さいほど、このグループの記録によく合う。</p>
+</div>
+</div>
+<div>
+<p><strong class="lesson-emphasis">予測確率を動かすと、損失は？</strong></p>
+<svg class="loss-chart" viewBox="0 0 420 230" role="img" aria-labelledby="loss-curve-title loss-curve-description">
+<title id="loss-curve-title">購入確率とグループ全員の平均Log Loss</title>
+<desc id="loss-curve-description">Cグループの購入割合は80%。平均Log Lossは予測80%で最小となる。</desc>
+<g stroke="#e3e9ee" stroke-width="1">
+<path d="M46 190 H404 M46 154 H404 M46 118 H404 M46 82 H404 M46 46 H404"/>
+</g>
+<g fill="#526171" font-size="12">
+<text x="36" y="194" text-anchor="end">0</text><text x="36" y="158" text-anchor="end">1</text>
+<text x="36" y="122" text-anchor="end">2</text><text x="36" y="86" text-anchor="end">3</text><text x="36" y="50" text-anchor="end">4</text>
+<text x="46" y="209" text-anchor="middle">0%</text><text x="117.6" y="209" text-anchor="middle">20%</text>
+<text x="225" y="209" text-anchor="middle">50%</text><text x="332.4" y="209" text-anchor="middle">80%</text><text x="404" y="209" text-anchor="middle">100%</text>
+<text x="225" y="228" text-anchor="middle">予測する購入確率 p</text>
+<text x="46" y="15">平均Log Loss（小さいほどよい）</text>
+</g>
+<path d="M46 25 V190 H404" fill="none" stroke="#657584" stroke-width="1.1"/>
+<path id="loss-minimum-guide" d="M332.4 25 V190" fill="none" stroke="#c06424" stroke-width="1.3" stroke-dasharray="4 4"/>
+<path id="loss-curve-path" d="" fill="none" stroke="#21548a" stroke-width="2.5"/>
+<circle id="loss-curve-current" cx="332.4" cy="172" r="5" fill="#21548a" stroke="white" stroke-width="1.5"/>
+</svg>
+<p class="loss-note loss-chart-caption"><span style="color:#21548a">● 今の予測</span>　<span class="loss-orange">┆ 実際の購入割合</span></p>
+<p class="loss-note loss-chart-caption" id="loss-minimum-caption">購入割合と同じ80%で、平均損失が最小。</p>
+</div>
+</div>
+<p class="loss-status" id="loss-live-summary" aria-live="polite">C：予測80% → 平均Log Loss 0.500。予測99%では、未購入の20人に大きな損失が生じる。</p>
+<p class="loss-note">表示は小数第3位に丸めている。これは各グループの採点練習であり、モデルの学習では共通の係数で300人全体を採点する。</p>
+<noscript><p>Cは購入80人・未購入20人。購入確率50%のLog Lossは0.693、80%なら0.500、99%なら0.929。99%では、未購入者に与えた確率が1%しかない。</p></noscript>
+</div>
+
+<script>
+(function(){
+  const root=document.getElementById('purchase-loss-demo');
+  const groups=__PURCHASE_GROUPS__;
+  const slider=root.querySelector('#loss-predicted-probability');
+  const maxLoss=-Math.log(0.01);
+  const byId=id=>root.querySelector('#'+id);
+  let selected=groups.find(g=>g.group==='C') || groups[groups.length-1];
+  const averageLoss=(p,g)=>-(g.purchased*Math.log(p)+(g.total-g.purchased)*Math.log1p(-p))/g.total;
+  const x=p=>46+358*p, y=v=>190-36*v;
+  const f=v=>v.toFixed(3);
+  function drawCurve(){
+    let d='';
+    for(let n=2;n<=198;n++){
+      const p=n/200;
+      d+=(n===2?'M':' L')+x(p).toFixed(2)+','+y(averageLoss(p,selected)).toFixed(2);
+    }
+    byId('loss-curve-path').setAttribute('d',d);
+    const observed=selected.purchased/selected.total;
+    byId('loss-minimum-guide').setAttribute('d','M'+x(observed).toFixed(2)+' 25 V190');
+    byId('loss-minimum-caption').textContent='購入割合と同じ'+Math.round(100*observed)+'%で、平均損失が最小。';
+  }
+  function update(){
+    const n=selected.total, bought=selected.purchased, unbought=n-bought;
+    const p=Number(slider.value)/100, actual=bought/n;
+    const boughtUnit=-Math.log(p), unboughtUnit=-Math.log1p(-p);
+    const boughtPart=bought*boughtUnit/n, unboughtPart=unbought*unboughtUnit/n;
+    const mean=boughtPart+unboughtPart;
+    byId('loss-observed-label').textContent=selected.group+'：購入'+bought+'人・未購入'+unbought+'人（'+n+'人）';
+    byId('loss-observed-bought').style.width=(100*actual)+'%';
+    byId('loss-observed-unbought').style.width=(100*(1-actual))+'%';
+    byId('loss-observed-bar').setAttribute('aria-label','実際の購入割合'+Math.round(100*actual)+'%、未購入割合'+Math.round(100*(1-actual))+'%');
+    byId('loss-predicted-label').textContent=Math.round(p*100)+'%';
+    byId('loss-observed-preset').textContent='購入割合と同じ：'+Math.round(100*actual)+'%';
+    byId('loss-bought-count').textContent='購入した'+bought+'人（y = 1）';
+    byId('loss-unbought-count').textContent='未購入の'+unbought+'人（y = 0）';
+    byId('loss-bought-probability').textContent=p.toFixed(2);
+    byId('loss-unbought-probability').textContent=(1-p).toFixed(2);
+    byId('loss-bought-unit').textContent=f(boughtUnit);
+    byId('loss-unbought-unit').textContent=f(unboughtUnit);
+    byId('loss-average-calculation').textContent='('+bought+' × '+f(boughtUnit)+' ＋ '+unbought+' × '+f(unboughtUnit)+') ÷ '+n;
+    byId('loss-contribution-values').innerHTML='<span class="loss-orange">購入分 '+f(boughtPart)+'</span> ＋ <span class="loss-gray">未購入分 '+f(unboughtPart)+'</span>';
+    byId('loss-contribution-bought').style.width=(100*boughtPart/maxLoss)+'%';
+    byId('loss-contribution-unbought').style.width=(100*unboughtPart/maxLoss)+'%';
+    byId('loss-contribution-bar').setAttribute('aria-label','平均損失への寄与：購入分'+f(boughtPart)+'、未購入分'+f(unboughtPart));
+    byId('loss-mean-value').textContent=f(mean);
+    byId('loss-curve-current').setAttribute('cx',x(p));
+    byId('loss-curve-current').setAttribute('cy',y(mean));
+    byId('loss-curve-description').textContent=selected.group+'グループの購入割合は'+Math.round(100*actual)+'%。予測'+Math.round(100*p)+'%の平均Log Lossは'+f(mean)+'。';
+    const hint=Math.abs(p-actual)<0.0001?'実際の購入割合と一致し、このグループの損失は最小。':p>actual?'購入確率を上げるほど、未購入者1人の損失は増える。':'購入確率を下げるほど、購入者1人の損失は増える。';
+    byId('loss-live-summary').textContent=selected.group+'：予測'+Math.round(100*p)+'% → 平均Log Loss '+f(mean)+'。'+hint;
+    root.querySelectorAll('[data-loss-group]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.lossGroup===selected.group)));
+    root.querySelectorAll('[data-loss-preset]').forEach(button=>{
+      const target=button.dataset.lossPreset==='observed'?Math.round(100*actual):Number(button.dataset.lossPreset);
+      button.setAttribute('aria-pressed',String(target===Number(slider.value)));
+    });
+  }
+  root.querySelectorAll('[data-loss-group]').forEach(button=>{
+    const group=groups.find(g=>g.group===button.dataset.lossGroup);
+    if(!group){button.hidden=true;return;}
+    button.textContent=group.group+'：購入'+group.purchased+'人';
+    button.addEventListener('click',()=>{selected=group;slider.value=Math.round(100*group.purchased/group.total);drawCurve();update();});
+  });
+  root.querySelectorAll('[data-loss-preset]').forEach(button=>button.addEventListener('click',()=>{
+    slider.value=button.dataset.lossPreset==='observed'?Math.round(100*selected.purchased/selected.total):button.dataset.lossPreset;
+    update();
+  }));
+  slider.addEventListener('input',update);
+  slider.value=Math.round(100*selected.purchased/selected.total);
+  drawCurve();update();
+})();
+</script>

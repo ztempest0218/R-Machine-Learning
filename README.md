@@ -18,6 +18,9 @@ Machine Learning with R course at Niigata University
 ### 004 k-Nearest Neighbors
 - [HTML](./004-knn.html)
 
+### 005 Logistic Regression
+- [HTML](./005-logistic-regression.html)
+
 ## 📄 その他
 - [シラバス](./R-syllabus.pdf)
 
