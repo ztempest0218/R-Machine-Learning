@@ -21,6 +21,10 @@ Machine Learning with R course at Niigata University
 ### 005 Logistic Regression
 - [HTML](./005-logistic-regression.html)
 
+## 📕 課題一覧
+
+- [HW1](./004-knn.html#課題)（ダイヤモンド価格予測、〆切 2026/11/11 16:30 日本時間）
+
 ## 📄 その他
 - [シラバス](./R-syllabus.pdf)
 
