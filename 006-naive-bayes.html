@@ -2958,6 +2958,14 @@ border-radius: 0px;
 .main-container strong.lesson-emphasis { font-weight: 700 !important; }
 .MathJax_CHTML .mjx-mtext, .MathJax_CHTML .mjx-mtext *,
 .MathJax_CHTML .mjx-unknown { font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", serif !important; font-weight: 400; }
+/* Keep the copy and folding buttons on one line above the source. */
+.sourceCode.code-with-copy { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: flex-start; column-gap: 4px; }
+.code-with-copy > .row { width: auto; margin: 0; }
+.code-with-copy > .row > div { padding: 0; }
+.code-with-copy .code-folding-btn { margin-right: 0; }
+.code-with-copy > pre, .code-with-copy > .r-code-collapse { flex: 0 0 100%; min-width: 0; }
+.code-copy-btn { margin-bottom: 4px; }
+@media print { .code-copy-btn { display: none; } }
 .bayes-demo { padding: 12px 0; margin: 24px 0; }
 .bayes-demo label { display: block; font-weight: 400; }
 .bayes-demo input { width: 100%; }
@@ -2997,6 +3005,54 @@ summary { cursor: pointer; color: #21548a; }
 .section > table { display: block; max-width: 100%; overflow-x: auto; }
 }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Local files and some embedded browsers may not expose the Clipboard API.
+  function copyWithSelection(text, button) {
+    const field = document.createElement('textarea');
+    field.value = text;
+    field.readOnly = true;
+    field.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+    document.body.appendChild(field);
+    try {
+      field.select();
+      return document.execCommand('copy');
+    } finally {
+      field.remove();
+      button.focus({ preventScroll: true });
+    }
+  }
+
+  document.querySelectorAll('pre.r > code').forEach(function (code) {
+    const block = code.closest('div.sourceCode');
+    if (!block) return;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'btn btn-default btn-xs code-copy-btn';
+    button.textContent = 'Copy';
+    button.title = 'Copy R code';
+    button.setAttribute('aria-live', 'polite');
+    block.classList.add('code-with-copy');
+    block.prepend(button);
+
+    let reset;
+    button.addEventListener('click', async function () {
+      const text = code.textContent;
+      let copied = false;
+      try {
+        await navigator.clipboard.writeText(text);
+        copied = true;
+      } catch {
+        try { copied = copyWithSelection(text, button); } catch { /* Copy was blocked. */ }
+      }
+      button.textContent = copied ? 'Copied!' : 'Copy failed';
+      clearTimeout(reset);
+      reset = setTimeout(function () { button.textContent = 'Copy'; }, 2000);
+    });
+  });
+});
+</script>
 <hr />
 <p><strong class="lesson-emphasis" style="color:blue">データのダウンロード</strong></p>
 <p>Kaggleの迷惑メール分類データを使う。保存先は、講義のプロジェクトフォルダを基準にする。</p>
