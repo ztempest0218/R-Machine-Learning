@@ -3631,10 +3631,9 @@ smoothing）</strong>である。「送金」の例で <span class="math inline"
 <div id="rによる迷惑メールの分類" class="section level1" number="4">
 <h1><span class="header-section-number">4</span>
 Rによる迷惑メールの分類</h1>
-<p>ここからは、Kaggleの<a href="https://www.kaggle.com/datasets/balaka18/email-spam-classification-dataset-csv">Email
-Spam Classification Dataset</a>を使う。英語のメール本文
-<code>text</code> と、通常メールを0、迷惑メールを1とする
-<code>spam</code> を含む。メール本文は非構造化データであり、Naive
+<p>ここからは、Kaggleの <a href="https://www.kaggle.com/datasets/karthickveerakumar/spam-filter">Spam filter</a> に収録された5,728通のメールを使う。各行には、英語のメール本文
+<code>text</code> と、通常メールを0、迷惑メールを1とするラベル
+<code>spam</code> がある。メール本文は非構造化データであり、Naive
 Bayesの計算に使うには、文章から特徴量を取り出す前処理が重要になる。
 前処理に使う tidyverse については、<a href="../R-Programming/006-data-manipulation.html">R入門のデータ前処理の回</a>を復習しよう。</p>
 <p>このデータは <code>train.csv</code> と <code>test.csv</code>
