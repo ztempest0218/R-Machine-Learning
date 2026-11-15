@@ -6,3 +6,7 @@
 grade/
 
 /hw1-webhook-relay/
+
+# Reference: track HTML only
+/hw1-reference/*
+!/hw1-reference/*.html

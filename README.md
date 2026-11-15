@@ -26,7 +26,7 @@ Machine Learning with R course at Niigata University
 
 ## 📕 課題一覧
 
-- [HW1](./004-knn.html#課題)（ダイヤモンド価格予測、〆切 2026/11/11 16:30 日本時間）
+- [HW1](./004-knn.html#課題)（ダイヤモンド価格予測、〆切 2026/11/11 16:30 日本時間） — [参考解答](./hw1-reference/report.html)
 
 ## 📄 その他
 - [シラバス](./R-syllabus.pdf)
