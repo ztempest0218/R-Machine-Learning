@@ -2946,7 +2946,7 @@ border-radius: 0px;
 
 <h1 class="title toc-ignore">Rによる機械学習<br>決定木</h1>
 <h4 class="author">Cho（<a href="mailto:ztempest0218@gmail.com" class="email">ztempest0218@gmail.com</a>）</h4>
-<h4 class="date">Last Updated: 2026-11-10</h4>
+<h4 class="date">Last Updated: 2026-11-18</h4>
 
 </div>
 
@@ -3434,7 +3434,6 @@ Trees）</strong>では、候補となる質問を比べ、不純度の減少量
 and
 conquer）</strong>の考え方である。大きな問題を小さく分け、それぞれで予測を作る。また、各段階で不純度を最も減らす質問を選ぶ方法を<strong>貪欲法（greedy
 algorithm）</strong>という。<u>その時点で最もよい質問を選ぶため、木全体が最適になるとは限らない</u>。</p>
-
 </div>
 <div id="決定木はどのように予測するか" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span>
@@ -4793,6 +4792,21 @@ summary() の出力を見る
 から婚姻状況を推測できる。こうした情報を特徴量にし、予測に役立つかを確かめることもできる。</p>
 <p>剪定後は正解率が少し上がった一方、生存者の再現率は下がった。<code>CrossTable()</code>
 で誤分類の内訳も確認しよう。実習の誤りは実際の判断に影響しないが、犯罪捜査やがんの検出では、無関係な人を疑う誤りや病気の見逃しが重大な結果につながるため、それぞれの影響を考える必要がある。Kaggleの<a href="https://www.kaggle.com/competitions/titanic/overview/evaluation">Titanic</a>では正解率（Accuracy）で評価されるが、単一の指標だけでモデルの有用性を判断するのは危険である。</p>
+</div>
+<div id="課題" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> 課題</h1>
+<p><strong>To-do</strong></p>
+<ol style="list-style-type: decimal">
+<li><strong>ClassmojiでHW2のリポジトリを開く</strong><br />
+<a href="https://app.classmoji.io/" class="uri">https://app.classmoji.io/</a></li>
+<li><strong>課題に取り組み、GitHubにpushする</strong><br />
+課題の内容と提出物は、リポジトリの <code>README.md</code>
+を確認すること。<br />
+提出方法はR入門のサイトの下方を参照すること。<br />
+<a href="https://ztempest0218.github.io/R-Programming/" class="uri">https://ztempest0218.github.io/R-Programming/</a></li>
+</ol>
+<p><strong>HW2 マーケティングへの反応の予測</strong></p>
+<p><strong>締切：2026年12月2日（水）16:30（日本時間）</strong></p>
 </div>
 
 

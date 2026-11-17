@@ -30,6 +30,7 @@ Machine Learning with R course at Niigata University
 ## 📕 課題一覧
 
 - [HW1](./004-knn.html#課題) ダイヤモンド価格予測 — [参考解答](./hw1-reference/report.html)
+- [HW2](./007-decision-tree.html#課題) マーケティングへの反応の予測 — 締切：2026年12月2日（水）16:30（日本時間）
 
 ## 📄 その他
 - [シラバス](./R-syllabus.pdf)

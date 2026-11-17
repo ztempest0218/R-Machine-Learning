@@ -11,3 +11,6 @@ grade/
 # Reference: track HTML only
 /hw1-reference/*
 !/hw1-reference/*.html
+
+# Teacher-only HW2 source data and hidden test answers
+/data/customer-marketing/
